@@ -1,0 +1,7 @@
+
+@font-face {
+    font-family:"TeXGyreHeros-Regular";
+    src:url("texgyreheros-regular.woff2") format("woff2"),url("texgyreheros-regular.woff") format("woff"),url("texgyreheros-regular.otf") format("opentype");
+    font-style:normal;font-weight:400;
+}
+        

@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+  }
+  html,
+  body,
+  #__next {
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-size: 16px;
+    overflow-x: hidden;
+    overflow: hidden;
+
+  }
+  #__next > div {
+    @apply bg-white;
+  }
+  b,
+  strong {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  header {
+    @apply font-condensed text-xl;
+  }
+
+}
+
+@layer utilities {
+  .cursor-move {
+    caret-color: yellow;
+  }
+}
+.full-screen-logo {
+  width: 10px;
+  height: 10px;
+}
+
+.full-screen-logo-inner {
+  height: 100%;
+  background: linear-gradient(to right, white 1px, transparent 1px) 0 0,
+    linear-gradient(to right, white 1px, transparent 1px) 0 100%,
+    linear-gradient(to left, white 1px, transparent 1px) 100% 0,
+    linear-gradient(to left, white 1px, transparent 1px) 100% 100%,
+    linear-gradient(to bottom, white 1px, transparent 1px) 0 0,
+    linear-gradient(to bottom, white 1px, transparent 1px) 100% 0,
+    linear-gradient(to top, white 1px, transparent 1px) 0 100%,
+    linear-gradient(to top, white 1px, transparent 1px) 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 3px 3px;
+}
+.overflow-x-hidden-important {
+  overflow-x: hidden !important;
+}
+/* .about {
+  letter-spacing: -4px
+} */
+.swiper,
+.swiper-horizontal {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.swiper-slide {
+  display: flex !important;
+  height: auto!important;
+}
+
+/* This only changes this particular animation duration */
+.animate__animated.animate__fadeIn {
+  --animate-duration: 200ms;
+}
+
+/* This changes all the animations globally */
+:root {
+  --animate-duration: 800ms;
+  --animate-delay: 0.9s;
+}
+
+div{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.videovimeo {
+
+  object-fit: fill
+
+ 
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .videovimeo {
+  width: 177.78vh!important;
+  height: 22.25vw!important;
+
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .videovimeo{
+  height: 49.25vw!important;
+  width: 120.78vh!important;
+
+}}
+
+
+
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 50%;
+  position: absolute;
+  pointer-events: none;
+  }
+  .cursor::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border: 2px solid yellow;
+  border-radius: 50%;
+  opacity: .5;
+  top: -8px;
+  left: -8px;
+  }
+  @keyframes cursorAnim {
+  0% {
+  transform: scale(1);
+  }
+  50% {
+  transform: scale(5);
+  }
+  100% {
+  transform: scale(1);
+  opacity: 0;
+  }
+  }
+  .expand {
+  animation: cursorAnim .5s forwards;
+  }

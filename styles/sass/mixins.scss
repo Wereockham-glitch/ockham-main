@@ -1,0 +1,117 @@
+/* stylelint-disable */
+
+// Rem output with px fallback
+@mixin font-size($sizeValue: 1) {
+	font-size: ($sizeValue * 16) * 1px;
+	font-size: $sizeValue * 1rem;
+}
+
+
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+	clear: both;
+}
+
+
+
+
+// Device width
+$desktop-xl: 2560px;
+$desktop-l: 1920px;
+$desktop-m: 1680px;
+$desktop-s: 1440px;
+$desktop-xs: 1280px;
+$tablet: 1024px;
+$mobile: 767px;
+$mobile-s: 360px;
+
+$d: 1728px;
+$dmin: 1280px;
+$t: 768px;
+$m: 390px;
+
+
+
+
+
+//--- function px to vw ---//
+@function calcvw($n, $screen: $d, $factor: 1) {
+	$valoresVw: ();
+
+	@each $nPx in $n {
+		@if $nPx==0 or $nPx==auto or $nPx==none or $nPx==inherit  or is-number($nPx) and unit($nPx) == "%" {
+			$valoresVw: append($valoresVw, $nPx, 'space');
+		}
+
+		@else {
+			$context: $screen * .01;
+			$valor: (calc($nPx / $context) * 1vw) * $factor;
+			$valoresVw: append($valoresVw, $valor, 'space');
+		}
+	}
+
+	@return $valoresVw;
+}
+
+//--- mixin px to vw ---//
+@mixin vw($property, $desktop_value, $mobile_value: $desktop_value, $tablet_value: $desktop_value, $desktop-xs_value: $tablet_value,$convertir: true) {
+
+	@if($desktop_value !='') {
+		@if($convertir) {
+			#{$property}: calcvw($desktop_value, $d);
+		}
+
+		@else {
+			#{$property}: $desktop_value;
+		}
+	}
+    @if($desktop-xs_value !='') {
+		@media (max-width: $desktop-xs) {
+			@if($convertir) {
+				#{$property}: calcvw($desktop-xs_value, $dmin);
+			}
+
+			@else {
+				#{$property}: $desktop-xs_value;
+			}
+		}
+	}
+
+    @if($tablet_value !='') {
+		@media (max-width: $tablet) {
+			@if($convertir) {
+				#{$property}: calcvw($tablet_value, $t);
+			}
+
+			@else {
+				#{$property}: $tablet_value;
+			}
+		}
+	}
+
+
+	@if($mobile_value !='') {
+		@media (max-width: $mobile) and (orientation:portrait) {
+			@if($convertir) {
+				#{$property}: calcvw($mobile_value, $m);
+			}
+
+			@else {
+				#{$property}: $mobile_value;
+			}
+		}
+
+		@media (max-width:$mobile) and (orientation:landscape) {
+			@if($convertir) {
+				#{$property}: calcvw($mobile_value, $m, 0.5);
+			}
+
+			@else {
+				#{$property}: $mobile_value;
+			}
+
+		}
+	}
+
+}
