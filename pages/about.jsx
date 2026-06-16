@@ -41,7 +41,7 @@ export default function Home({ page = undefined }) {
           className="overflow-hidden max-w-[1560px] mx-auto flex flex-col justify-center relative z-30 items-center "
         >
           <div className="h-full  p-8 tracking-tighter text-center">
-            <div className="text-lg md:text-5xl uppercase  mx-auto  mb-8 font-condensed">
+            <div className="text-lg md:text-3xl uppercase  mx-auto  mb-8 font-condensed">
               OCKHAM is a director duo comprised of Lucas Couto and Cora Patiño.
               We see the image as a space for expression and communication.
             </div>
@@ -51,14 +51,14 @@ export default function Home({ page = undefined }) {
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://vimeo.com/weareockham"
+            href="https://vimeo.com/ockhamdirectors"
           >
             VIMEO
           </a>
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://www.instagram.com/weareockham"
+            href="https://www.instagram.com/ockham_directors/"
           >
             INSTAGRAM
           </a>
