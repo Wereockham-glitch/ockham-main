@@ -43,6 +43,7 @@ export default function Home({ page = undefined }) {
           <div className="h-full  p-8 tracking-tighter text-center">
             <div className="text-lg md:text-3xl uppercase  mx-auto  mb-8 font-condensed">
               OCKHAM is a director duo comprised of Lucas Couto and Cora Patiño.
+              <br />
               We see the image as a space for expression and communication.
             </div>
           </div>
