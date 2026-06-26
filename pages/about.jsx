@@ -28,7 +28,7 @@ export default function About({ page = undefined }) {
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
         {/* Texto */}
-        <div className="max-w-[508px] font-condensed text-[17px] leading-[1.2] tracking-[-0.04em]">
+        <div className="max-w-[520px] font-condensed text-[16px] leading-[1.2] tracking-[-0.04em]">
           <div
             onClick={goHome}
             className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
@@ -57,12 +57,12 @@ export default function About({ page = undefined }) {
         </div>
 
         {/* Footer */}
-        <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
+        <div className="flex flex-col items-end gap-0.5 text-[11px] md:text-[14px] tracking-[-0.02em]">
           <div className="text-[14px] md:text-[18px]">
             <a href="mailto:weareockham@gmail.com">mail</a>
           </div>
 
-          <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
+          <div className="flex flex-col items-end gap-0.5 text-[11px] md:text-[14px] tracking-[-0.02em]">
             <a
               href="https://vimeo.com/ockhamduo"
               target="_blank"
