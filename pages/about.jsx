@@ -13,9 +13,9 @@ export default function About({ page = undefined }) {
   const goHome = () => {
     setIsLeaving(true);
 
-    setTimeout(() => {
-      router.push("/");
-    }, 1200);
+  setTimeout(() => {
+  router.push("/");
+  }, 1500);
   };
 
   return (
