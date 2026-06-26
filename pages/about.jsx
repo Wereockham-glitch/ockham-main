@@ -9,7 +9,7 @@ export default function About({ page = undefined }) {
     <div className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-24 pb-8">
       
       {/* Texto */}
-      <div className="max-w-[760px] leading-tight font-condensed text-[22px] md:text-[34px]">
+      className="max-w-[760px] leading-snug font-condensed text-[14px] md:text-[18px]"
         <p>
           We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
           by Lucas Couto and Cora Patiño.
@@ -29,24 +29,22 @@ export default function About({ page = undefined }) {
       </div>
 
       {/* Imagen */}
-      <div className="mt-12">
+      <div className="mt-8">
         <Image
           src={AboutImage}
           alt="Lucas and Cora"
-          className="w-full max-w-[460px] h-auto"
+          className="w-full max-w-[320px] h-auto"
           priority
-        />
+        />  
       </div>
 
       {/* Footer */}
       <div className="mt-16 flex justify-between items-end font-condensed">
-        <div className="flex flex-col gap-6 text-xl">
-          <a href="mailto:weareockham@gmail.com">mail</a>
-          <div>press:</div>
-          <div>awards:</div>
+        <div className="text-[14px] md:text-[18px]">
+       <a href="mailto:weareockham@gmail.com">mail</a>
         </div>
 
-        <div className="flex flex-col items-end gap-2 text-xl">
+        <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
           <a
             href="https://vimeo.com/ockhamdirectors"
             target="_blank"
@@ -60,7 +58,7 @@ export default function About({ page = undefined }) {
             target="_blank"
             rel="noreferrer"
           >
-            instagram
+            @ockham.duo
           </a>
         </div>
       </div>

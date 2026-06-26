@@ -9,7 +9,7 @@ const Header = ({ setFullscreen }) => {
         </Link>
       </div>
 
-      <nav className="flex">
+      <nav className="flex text-[13px] tracking-tight">
         <div onClick={() => setFullscreen(false)}>
           <Link className="mx-5" href="/about">
             about
