@@ -1,75 +1,74 @@
-import { use100vh } from "react-div-100vh";
+import Image from "next/image";
+import AboutImage from "../public/img/about.jpg";
 import "animate.css";
-// import { NextSeo } from "next-seo";
 import { getApolloClient } from "@/lib/apollo";
 import { gql } from "@apollo/client";
 
-export default function Home({ page = undefined }) {
-  const height = use100vh();
-  const cHeight = height ? height - 40 * 2 : "calc(100vh - 2rem)";
-  // const { seo } = page?.page;
-
+export default function About({ page = undefined }) {
   return (
-    <>
-      {/* <NextSeo
-        title={seo?.title ?? ""}
-        description={seo?.metaDesc ?? ""}
-        openGraph={{
-          url: "https://ockham.studio/about",
-          title: seo?.title ?? "",
-          description: seo?.metaDesc ?? "",
-          images: [
-            {
-              url: seo?.opengraphImage?.sourceUrl ?? "",
-              width: 200,
-              height: 200,
-              alt: seo?.opengraphImage?.altText,
-              type: "image/jpeg",
-            },
-          ],
-          siteName: seo?.title,
-        }}
-        twitter={{
-          handle: "@handle",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      /> */}
-      <div className="animate__animated animate__fadeIn bg-white">
-        <div
-          style={{ minHeight: cHeight }}
-          className="overflow-hidden max-w-[1560px] mx-auto flex flex-col justify-center relative z-30 items-center "
-        >
-          <div className="h-full  p-8 tracking-tighter text-center">
-            <div className="text-lg md:text-3xl uppercase  mx-auto  mb-8 font-condensed">
-              OCKHAM is a director duo comprised of Lucas Couto and Cora Patiño.
-              <br />
-              We see the image as a space for expression and communication.
-            </div>
-          </div>
+    <div className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-24 pb-8">
+      
+      {/* Texto */}
+      <div className="max-w-[760px] leading-tight font-condensed text-[22px] md:text-[34px]">
+        <p>
+          We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
+          by Lucas Couto and Cora Patiño.
+        </p>
+
+        <p className="mt-4">
+          Working across film and art direction, our practice combines visual
+          precision with emotional intuition, creating images that feel both raw
+          and carefully constructed.
+        </p>
+
+        <p className="mt-4">
+          We develop commercial, narrative and art-driven projects, shaping
+          visual worlds through direction, production design and creative
+          development.
+        </p>
+      </div>
+
+      {/* Imagen */}
+      <div className="mt-12">
+        <Image
+          src={AboutImage}
+          alt="Lucas and Cora"
+          className="w-full max-w-[460px] h-auto"
+          priority
+        />
+      </div>
+
+      {/* Footer */}
+      <div className="mt-16 flex justify-between items-end font-condensed">
+        <div className="flex flex-col gap-6 text-xl">
+          <a href="mailto:weareockham@gmail.com">mail</a>
+          <div>press:</div>
+          <div>awards:</div>
         </div>
-        <div className="p-8 flex justify-between  text-xl uppercase   pb-8 font-condensed">
+
+        <div className="flex flex-col items-end gap-2 text-xl">
           <a
-            target="_blank"
-            rel="noreferrer"
             href="https://vimeo.com/ockhamdirectors"
-          >
-            VIMEO
-          </a>
-          <a
             target="_blank"
             rel="noreferrer"
-            href="https://www.instagram.com/ockham_directors/"
           >
-            INSTAGRAM
+            vimeo
+          </a>
+
+          <a
+            href="https://www.instagram.com/ockham_directors/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            instagram
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export async function getStaticProps({ locale }) {
+export async function getStaticProps() {
   const apolloClient = getApolloClient();
 
   const data = await apolloClient.query({
@@ -77,31 +76,14 @@ export async function getStaticProps({ locale }) {
       query AboutContent {
         page(id: "about", idType: URI) {
           seo {
-            fullHead
-
             title
             metaDesc
-
-            opengraphAuthor
-            opengraphDescription
-            opengraphTitle
-            opengraphDescription
-
-            opengraphImage {
-              altText
-              sourceUrl
-              srcSet
-            }
-            twitterImage {
-              altText
-              sourceUrl
-              srcSet
-            }
           }
         }
       }
     `,
   });
+
   const page = {
     ...data?.data,
   };
