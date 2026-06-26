@@ -21,10 +21,10 @@ export default function About({ page = undefined }) {
     <>
       {/* White transition overlay */}
       <div
-        className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-[1500ms] ${
-          showOverlay ? "opacity-100" : "opacity-0"
-        }`}
-      />
+  className={`fixed inset-0 bg-red-500 z-[99999] pointer-events-none ${
+    showOverlay ? "opacity-100" : "opacity-0"
+  } transition-opacity duration-[1500ms]`}
+/>
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
         {/* Texto */}
