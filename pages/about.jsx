@@ -9,25 +9,22 @@ export default function About({ page = undefined }) {
   const router = useRouter();
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const goToAbout = () => {
-  console.log("CLICK ABOUT");
+  const goHome = () => {
+    setShowOverlay(true);
 
-  setShowOverlay(true);
-
-  setTimeout(() => {
-    console.log("PUSHING TO ABOUT");
-    window.location.href = "/about";
-  }, 1500);
-};
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
+  };
 
   return (
     <>
       {/* White transition overlay */}
       <div
-  className={`fixed inset-0 z-[99999] pointer-events-none backdrop-blur-md transition-all duration-[1500ms] ${
-    showOverlay ? "opacity-100 bg-white/70" : "opacity-0 bg-white/0"
-  }`}
-/>
+        className={`fixed inset-0 z-[99999] pointer-events-none backdrop-blur-md transition-all duration-[1500ms] ${
+          showOverlay ? "opacity-100 bg-white/70" : "opacity-0 bg-white/0"
+        }`}
+      />
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
         {/* Texto */}
