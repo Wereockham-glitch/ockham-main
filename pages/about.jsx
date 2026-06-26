@@ -7,10 +7,10 @@ import { gql } from "@apollo/client";
 
 export default function About({ page = undefined }) {
   const router = useRouter();
-  const [isLeaving, setIsLeaving] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const goHome = () => {
-    setIsLeaving(true);
+    setShowOverlay(true);
 
     setTimeout(() => {
       router.push("/");
@@ -18,73 +18,76 @@ export default function About({ page = undefined }) {
   };
 
   return (
-    <div
-      className={`bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col transition-all duration-[1500ms] ${
-        isLeaving
-          ? "opacity-0 blur-[4px] scale-[0.995]"
-          : "opacity-100"
-      }`}
-    >
-      {/* Texto */}
-      <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
-        <div
-          onClick={goHome}
-          className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
-        >
-          <p>
-            We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
-            by Lucas Couto and Cora Patiño.
+    <>
+      {/* White transition overlay */}
+      <div
+        className={`fixed inset-0 bg-white z-[999] pointer-events-none transition-opacity duration-[1500ms] ${
+          showOverlay ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
+        {/* Texto */}
+        <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
+          <div
+            onClick={goHome}
+            className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
+          >
+            <p>
+              We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
+              by Lucas Couto and Cora Patiño.
+            </p>
+          </div>
+
+          <p className="mt-4">
+            Working across film and art direction, our practice combines visual
+            precision with emotional intuition, creating images that feel both raw
+            and carefully constructed.
+          </p>
+
+          <p className="mt-4">
+            We develop commercial, narrative and art-driven projects, shaping
+            visual worlds through direction, production design and creative
+            development.
           </p>
         </div>
 
-        <p className="mt-4">
-          Working across film and art direction, our practice combines visual
-          precision with emotional intuition, creating images that feel both raw
-          and carefully constructed.
-        </p>
-
-        <p className="mt-4">
-          We develop commercial, narrative and art-driven projects, shaping
-          visual worlds through direction, production design and creative
-          development.
-        </p>
-      </div>
-
-      {/* Imagen */}
-      <div className="mt-8">
-        <Image
-          src={AboutImage}
-          alt="Lucas and Cora"
-          className="w-full max-w-[380px] h-auto"
-          priority
-        />
-      </div>
-
-      {/* Footer */}
-      <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
-        <div className="text-[14px] md:text-[18px]">
-          <a href="mailto:weareockham@gmail.com">mail</a>
+        {/* Imagen */}
+        <div className="mt-8">
+          <Image
+            src={AboutImage}
+            alt="Lucas and Cora"
+            className="w-full max-w-[380px] h-auto"
+            priority
+          />
         </div>
 
-        <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
-          <a
-            href="https://vimeo.com/ockhamduo"
-            target="_blank"
-            rel="noreferrer"
-          >
-            vimeo
-          </a>
+        {/* Footer */}
+        <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
+          <div className="text-[14px] md:text-[18px]">
+            <a href="mailto:weareockham@gmail.com">mail</a>
+          </div>
 
-          <a
-            href="https://www.instagram.com/ockham.duo/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            @ockham.duo
-          </a>
+          <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
+            <a
+              href="https://vimeo.com/ockhamduo"
+              target="_blank"
+              rel="noreferrer"
+            >
+              vimeo
+            </a>
+
+            <a
+              href="https://www.instagram.com/ockham.duo/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @ockham.duo
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
