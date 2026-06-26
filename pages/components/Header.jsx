@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 const Header = ({ setFullscreen }) => {
   const router = useRouter();
   const isAbout = router.pathname === "/about";
+  const isDaily = router.pathname === "/daily";
 
   return (
     <header className="flex justify-between fixed z-[70] top-0 w-full px-6 py-4 mix-blend-difference bg-black text-white">
@@ -17,7 +18,7 @@ const Header = ({ setFullscreen }) => {
             </>
           </Link>
         )}
-      </div>
+      </div>  
 
       {/* Right side */}
       <nav className="flex text-[13px] tracking-tight">
@@ -28,7 +29,9 @@ const Header = ({ setFullscreen }) => {
         </div>
 
         <div onClick={() => setFullscreen?.(false)}>
-          <Link href="/daily">daily</Link>
+          <Link className={isDaily ? "font-bold" : ""} href="/daily">
+            daily
+          </Link>
         </div>
       </nav>
     </header>
