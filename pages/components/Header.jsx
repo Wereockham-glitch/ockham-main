@@ -10,10 +10,12 @@ const Header = ({ setFullscreen }) => {
   const isDaily = router.pathname === "/daily";
 
   const goToAbout = () => {
+    console.log("ABOUT CLICK");
     setShowOverlay(true);
 
     setTimeout(() => {
-      router.push("/about");
+      console.log("GO ABOUT");
+      window.location.href = "/about";
     }, 1500);
   };
 
