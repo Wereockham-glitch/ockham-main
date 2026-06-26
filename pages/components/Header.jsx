@@ -45,7 +45,8 @@ const Header = ({ setFullscreen }) => {
 
         {/* Right side */}
         <nav className="flex text-[13px] tracking-tight pointer-events-auto">
-          <div onClick={() => setFullscreen?.(false)}>
+          {/* ABOUT */}
+          <div>
             {isAbout ? (
               <Link className="mx-5 font-bold" href="/about">
                 about
@@ -60,6 +61,7 @@ const Header = ({ setFullscreen }) => {
             )}
           </div>
 
+          {/* DAILY */}
           <div onClick={() => setFullscreen?.(false)}>
             <Link className={isDaily ? "font-bold" : ""} href="/daily">
               daily
