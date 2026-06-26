@@ -28,20 +28,18 @@ export default function About({ page = undefined }) {
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
         {/* Texto */}
-        <div className="max-w-[520px] font-condensed text-[18px] leading-[1.3] tracking-[-0.04em]">
+        <div className="max-w-[640px] font-condensed text-[17px] leading-[1.28] tracking-[-0.035em]">
           <div
             onClick={goHome}
             className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
           >
             <p>
               We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
-              by Lucas Couto and Cora Patiño.
-              Working across film and art direction, our practice combines visual
-              precision with emotional intuition, creating images that feel both raw
-              and carefully constructed.
-              We develop commercial, narrative and art-driven projects, shaping
-              visual worlds through direction, production design and creative
-              development.
+              by Lucas Couto and Cora Patiño. Working across film and art direction,
+              our practice combines visual precision with emotional intuition,
+              creating images that feel both raw and carefully constructed. We
+              develop commercial, narrative and art-driven projects, shaping visual
+              worlds through direction, production design and creative development.
             </p>
           </div>
         </div>
@@ -57,29 +55,29 @@ export default function About({ page = undefined }) {
         </div>
 
         {/* Footer */}
-<div className="mt-auto pt-16 flex justify-between items-end font-condensed">
-  <div className="text-[11px] md:text-[14px] tracking-[-0.02em]">
-    <a href="mailto:weareockham@gmail.com">mail</a>
-  </div>
+        <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
+          <div className="text-[11px] md:text-[14px] tracking-[-0.02em]">
+            <a href="mailto:weareockham@gmail.com">mail</a>
+          </div>
 
-  <div className="flex flex-col items-end gap-0.5 text-[11px] md:text-[14px] tracking-[-0.02em]">
-    <a
-      href="https://vimeo.com/ockhamduo"
-      target="_blank"
-      rel="noreferrer"
-    >
-      vimeo
-    </a>
+          <div className="flex flex-col items-end gap-0.5 text-[11px] md:text-[14px] tracking-[-0.02em]">
+            <a
+              href="https://vimeo.com/ockhamduo"
+              target="_blank"
+              rel="noreferrer"
+            >
+              vimeo
+            </a>
 
-    <a
-      href="https://www.instagram.com/ockham.duo/"
-      target="_blank"
-      rel="noreferrer"
-    >
-      @ockham.duo
-    </a>
-  </div>
-</div>
+            <a
+              href="https://www.instagram.com/ockham.duo/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @ockham.duo
+            </a>
+          </div>
+        </div>
       </div>
     </>
   );
