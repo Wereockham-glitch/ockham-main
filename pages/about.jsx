@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import AboutImage from "../public/img/about.jpg";
 import "animate.css";
@@ -6,22 +7,35 @@ import { getApolloClient } from "@/lib/apollo";
 import { gql } from "@apollo/client";
 
 export default function About({ page = undefined }) {
+  const router = useRouter();
+  const [isLeaving, setIsLeaving] = useState(false);
+
+  const goHome = () => {
+    setIsLeaving(true);
+
+    setTimeout(() => {
+      router.push("/");
+    }, 1200);
+  };
+
   return (
     <div
-      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-16 pb-8 flex flex-col"
+      className={`bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col transition-opacity duration-[1500ms] ${
+        isLeaving ? "opacity-0" : "opacity-100"
+      } animate__animated animate__fadeIn`}
       style={{ animationDuration: "3s" }}
     >
       {/* Texto */}
       <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
-        <Link
-          href="/"
+        <div
+          onClick={goHome}
           className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
         >
           <p>
             We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
             by Lucas Couto and Cora Patiño.
           </p>
-        </Link>
+        </div>
 
         <p className="mt-4">
           Working across film and art direction, our practice combines visual
@@ -41,7 +55,7 @@ export default function About({ page = undefined }) {
         <Image
           src={AboutImage}
           alt="Lucas and Cora"
-          className="w-full max-w-[320px] h-auto"
+          className="w-full max-w-[380px] h-auto"
           priority
         />
       </div>
@@ -54,7 +68,7 @@ export default function About({ page = undefined }) {
 
         <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
           <a
-            href="https://vimeo.com/ockhamdirectors"
+            href="https://vimeo.com/ockhamduo"
             target="_blank"
             rel="noreferrer"
           >
@@ -62,7 +76,7 @@ export default function About({ page = undefined }) {
           </a>
 
           <a
-            href="https://www.instagram.com/ockham_directors/"
+            href="https://www.instagram.com/ockham.duo/"
             target="_blank"
             rel="noreferrer"
           >
