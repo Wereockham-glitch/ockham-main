@@ -28,7 +28,7 @@ export default function About({ page = undefined }) {
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
         {/* Texto */}
-        <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
+        <div className="max-w-[620px] font-condensed text-[17px] leading-[1.2] tracking-[-0.04em]">
           <div
             onClick={goHome}
             className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
@@ -36,20 +36,18 @@ export default function About({ page = undefined }) {
             <p>
               We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
               by Lucas Couto and Cora Patiño.
+              <br />
+              <br />
+              Working across film and art direction, our practice combines visual
+              precision with emotional intuition, creating images that feel both raw
+              and carefully constructed.
+              <br />
+              <br />
+              We develop commercial, narrative and art-driven projects, shaping
+              visual worlds through direction, production design and creative
+              development.
             </p>
           </div>
-
-          <p className="mt-4">
-            Working across film and art direction, our practice combines visual
-            precision with emotional intuition, creating images that feel both raw
-            and carefully constructed.
-          </p>
-
-          <p className="mt-4">
-            We develop commercial, narrative and art-driven projects, shaping
-            visual worlds through direction, production design and creative
-            development.
-          </p>
         </div>
 
         {/* Imagen */}
