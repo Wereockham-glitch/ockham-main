@@ -9,13 +9,16 @@ export default function About({ page = undefined }) {
   const router = useRouter();
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const goHome = () => {
-    setShowOverlay(true);
+  const goToAbout = () => {
+  console.log("CLICK ABOUT");
 
-    setTimeout(() => {
-      router.push("/");
-    }, 1500);
-  };
+  setShowOverlay(true);
+
+  setTimeout(() => {
+    console.log("PUSHING TO ABOUT");
+    window.location.href = "/about";
+  }, 1500);
+};
 
   return (
     <>
