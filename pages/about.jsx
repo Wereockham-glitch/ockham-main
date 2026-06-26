@@ -28,7 +28,7 @@ export default function About({ page = undefined }) {
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
         {/* Texto */}
-        <div className="max-w-[520px] font-condensed text-[16px] leading-[1.3] tracking-[-0.04em]">
+        <div className="max-w-[520px] font-condensed text-[18px] leading-[1.3] tracking-[-0.04em]">
           <div
             onClick={goHome}
             className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
@@ -51,7 +51,7 @@ export default function About({ page = undefined }) {
           <Image
             src={AboutImage}
             alt="Lucas and Cora"
-            className="w-full max-w-[380px] h-auto"
+            className="w-full max-w-[390px] h-auto"
             priority
           />
         </div>
