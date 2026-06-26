@@ -1,16 +1,13 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Header = ({ setFullscreen }) => {
-  const [isAbout, setIsAbout] = useState(false);
-
-  useEffect(() => {
-    setIsAbout(window.location.pathname === "/about");
-  }, []);
+  const router = useRouter();
+  const isAbout = router.pathname === "/about";
 
   return (
     <header className="flex justify-between fixed z-[70] top-0 w-full px-6 py-4 mix-blend-difference bg-black text-white">
-
+      
       {/* Left side */}
       <div onClick={() => setFullscreen?.(false)}>
         {!isAbout && (
