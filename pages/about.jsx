@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import AboutImage from "../public/img/about.jpg";
 import "animate.css";
@@ -7,14 +8,20 @@ import { gql } from "@apollo/client";
 export default function About({ page = undefined }) {
   return (
     <div
-      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-16 pb-8 flex flex-col"
+      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-24 pb-8 flex flex-col"
       style={{ animationDuration: "3s" }}
     >
       {/* Texto */}
       <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
-        <p>
-          based between Madrid, by Lucas Couto and Cora Patiño.
-        </p>
+        <Link
+          href="/"
+          className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
+        >
+          <p>
+            We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
+            by Lucas Couto and Cora Patiño.
+          </p>
+        </Link>
 
         <p className="mt-4">
           Working across film and art direction, our practice combines visual
