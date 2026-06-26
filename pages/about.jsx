@@ -6,7 +6,10 @@ import { gql } from "@apollo/client";
 
 export default function About({ page = undefined }) {
   return (
-    <div className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-24 pb-8">
+  <div
+  className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-10 pb-8 flex flex-col"
+  style={{ animationDuration: "3s" }}
+>
       
       {/* Texto */}
       <div className="max-w-[760px] leading-snug font-condensed text-[14px] md:text-[18px]">
@@ -39,7 +42,7 @@ export default function About({ page = undefined }) {
       </div>
 
       {/* Footer */}
-      <div className="mt-16 flex justify-between items-end font-condensed">
+      <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
         <div className="text-[14px] md:text-[18px]">
        <a href="mailto:weareockham@gmail.com">mail</a>
         </div>
