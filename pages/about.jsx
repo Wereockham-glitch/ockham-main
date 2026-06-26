@@ -28,7 +28,10 @@ export default function About({ page = undefined }) {
       {/* Texto */}
       <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
         <div
-          onClick={goHome}
+        onClick={() => {
+  console.log("CLICK");
+  goHome();
+}}
           className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
         >
           <p>
