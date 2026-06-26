@@ -1,3 +1,3 @@
-const Cabecera = () => null;
+    const Cabecera = () => null;
 
-export default Cabecera;
+    export default Cabecera;
