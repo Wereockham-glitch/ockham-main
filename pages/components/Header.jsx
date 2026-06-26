@@ -10,7 +10,10 @@ const Header = ({ setFullscreen }) => {
     <header className="flex justify-between fixed z-[70] top-0 w-full px-6 py-4 mix-blend-difference bg-black text-white">
       
       {/* Left side */}
-      <div onClick={() => setFullscreen?.(false)}>
+      <div
+        className="text-[13px] md:text-[17px]"
+        onClick={() => setFullscreen?.(false)}
+      >
         {!isAbout && (
           <Link href="/">
             <>
@@ -18,18 +21,24 @@ const Header = ({ setFullscreen }) => {
             </>
           </Link>
         )}
-      </div>  
+      </div>
 
       {/* Right side */}
       <nav className="flex text-[13px] tracking-tight">
         <div onClick={() => setFullscreen?.(false)}>
-          <Link className="mx-5" href="/about">
+          <Link
+            className={`mx-5 ${isAbout ? "font-bold" : ""}`}
+            href="/about"
+          >
             about
           </Link>
         </div>
 
         <div onClick={() => setFullscreen?.(false)}>
-          <Link className={isDaily ? "font-bold" : ""} href="/daily">
+          <Link
+            className={isDaily ? "font-bold" : ""}
+            href="/daily"
+          >
             daily
           </Link>
         </div>
