@@ -16,7 +16,7 @@ export default function About({ page = undefined }) {
       router.push("/");
     }, 1500);
   };
-  
+
   return (
     <>
       {/* White transition overlay */}
