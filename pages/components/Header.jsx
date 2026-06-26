@@ -13,7 +13,7 @@ const Header = ({ setFullscreen }) => {
         {!isAbout && (
           <Link href="/">
             <>
-              We’re <span className="font-bold">OCKHAM</span>, a directing duo
+              HELLO TEST <span className="font-bold">OCKHAM</span>, a directing duo
             </>
           </Link>
         )}
