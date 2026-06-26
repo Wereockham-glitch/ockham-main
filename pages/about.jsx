@@ -59,7 +59,7 @@ export default function About({ page = undefined }) {
           <Image
             src={AboutImage}
             alt="Lucas and Cora"
-            className="w-full max-w-[390px] h-auto"
+            className="w-full max-w-[420px] h-auto"
             priority
           />
         </div>
