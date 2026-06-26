@@ -9,7 +9,7 @@ export default function About({ page = undefined }) {
     <div className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-24 pb-8">
       
       {/* Texto */}
-      className="max-w-[760px] leading-snug font-condensed text-[14px] md:text-[18px]"
+      <div className="max-w-[760px] leading-snug font-condensed text-[14px] md:text-[18px]">
         <p>
           We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
           by Lucas Couto and Cora Patiño.
