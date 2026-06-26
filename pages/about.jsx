@@ -7,11 +7,11 @@ import { gql } from "@apollo/client";
 export default function About({ page = undefined }) {
   return (
     <div
-      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-6 pb-8 flex flex-col"
+      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-16 pb-8 flex flex-col"
       style={{ animationDuration: "3s" }}
     >
       {/* Texto */}
-      <div className="max-w-[760px] leading-snug font-condensed text-[14px] md:text-[18px]">
+      <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
         <p>
           based between Madrid, by Lucas Couto and Cora Patiño.
         </p>
