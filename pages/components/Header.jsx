@@ -1,16 +1,25 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Header = ({ setFullscreen }) => {
+  const router = useRouter();
+  const isAbout = router.pathname === "/about";
+
   return (
     <header className="flex justify-between fixed z-[70] top-0 w-full px-6 py-4 mix-blend-difference bg-black text-white">
+      
+      {/* Left side */}
       <div onClick={() => setFullscreen?.(false)}>
-        <Link href="/">
-          <>
-            We’re <span className="font-bold">OCKHAM</span>, a directing duo
-          </>
-        </Link>
+        {!isAbout && (
+          <Link href="/">
+            <>
+              We’re <span className="font-bold">OCKHAM</span>, a directing duo
+            </>
+          </Link>
+        )}
       </div>
 
+      {/* Right side */}
       <nav className="flex text-[13px] tracking-tight">
         <div onClick={() => setFullscreen?.(false)}>
           <Link className="mx-5" href="/about">
