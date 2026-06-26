@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import AboutImage from "../public/img/about.jpg";
-import "animate.css";
 import { getApolloClient } from "@/lib/apollo";
 import { gql } from "@apollo/client";
 
@@ -26,68 +25,63 @@ export default function About({ page = undefined }) {
           : "opacity-100"
       }`}
     >
-      <div
-        className="animate__animated animate__fadeIn"
-        style={{ animationDuration: "3s" }}
-      >
-        {/* Texto */}
-        <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
-          <div
-            onClick={goHome}
-            className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
+      {/* Texto */}
+      <div className="max-w-[760px] leading-tight font-condensed text-[13px] md:text-[17px]">
+        <div
+          onClick={goHome}
+          className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
+        >
+          <p>
+            We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
+            by Lucas Couto and Cora Patiño.
+          </p>
+        </div>
+
+        <p className="mt-4">
+          Working across film and art direction, our practice combines visual
+          precision with emotional intuition, creating images that feel both raw
+          and carefully constructed.
+        </p>
+
+        <p className="mt-4">
+          We develop commercial, narrative and art-driven projects, shaping
+          visual worlds through direction, production design and creative
+          development.
+        </p>
+      </div>
+
+      {/* Imagen */}
+      <div className="mt-8">
+        <Image
+          src={AboutImage}
+          alt="Lucas and Cora"
+          className="w-full max-w-[380px] h-auto"
+          priority
+        />
+      </div>
+
+      {/* Footer */}
+      <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
+        <div className="text-[14px] md:text-[18px]">
+          <a href="mailto:weareockham@gmail.com">mail</a>
+        </div>
+
+        <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
+          <a
+            href="https://vimeo.com/ockhamduo"
+            target="_blank"
+            rel="noreferrer"
           >
-            <p>
-              We’re <strong>OCKHAM</strong>, a directing duo based between Madrid,
-              by Lucas Couto and Cora Patiño.
-            </p>
-          </div>
+            vimeo
+          </a>
 
-          <p className="mt-4">
-            Working across film and art direction, our practice combines visual
-            precision with emotional intuition, creating images that feel both raw
-            and carefully constructed.
-          </p>
-
-          <p className="mt-4">
-            We develop commercial, narrative and art-driven projects, shaping
-            visual worlds through direction, production design and creative
-            development.
-          </p>
-        </div>
-
-        {/* Imagen */}
-        <div className="mt-8">
-          <Image
-            src={AboutImage}
-            alt="Lucas and Cora"
-            className="w-full max-w-[380px] h-auto"
-            priority
-          />
-        </div>
-
-        {/* Footer */}
-        <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
-          <div className="text-[14px] md:text-[18px]">
-            <a href="mailto:weareockham@gmail.com">mail</a>
-          </div>
-
-          <div className="flex flex-col items-end gap-1 text-[14px] md:text-[18px]">
-            <a
-              href="https://vimeo.com/ockhamduo"
-              target="_blank"
-              rel="noreferrer"
-            >
-              vimeo
-            </a>
-
-            <a
-              href="https://www.instagram.com/ockham.duo/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              @ockham.duo
-            </a>
-          </div>
+          <a
+            href="https://www.instagram.com/ockham.duo/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @ockham.duo
+          </a>
         </div>
       </div>
     </div>
