@@ -8,7 +8,7 @@ import { gql } from "@apollo/client";
 export default function About({ page = undefined }) {
   return (
     <div
-      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-24 pb-8 flex flex-col"
+      className="animate__animated animate__fadeIn bg-white min-h-screen px-8 pt-16 pb-8 flex flex-col"
       style={{ animationDuration: "3s" }}
     >
       {/* Texto */}
