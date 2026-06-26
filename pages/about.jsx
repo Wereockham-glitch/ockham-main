@@ -21,9 +21,9 @@ export default function About({ page = undefined }) {
     <>
       {/* White transition overlay */}
       <div
-  className={`fixed inset-0 bg-red-500 z-[99999] pointer-events-none ${
-    showOverlay ? "opacity-100" : "opacity-0"
-  } transition-opacity duration-[1500ms]`}
+  className={`fixed inset-0 z-[99999] pointer-events-none backdrop-blur-md transition-all duration-[1500ms] ${
+    showOverlay ? "opacity-100 bg-white/70" : "opacity-0 bg-white/0"
+  }`}
 />
 
       <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
