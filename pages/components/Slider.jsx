@@ -43,14 +43,13 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
         <Swiper
         key={1+'a'}
           className={
-            "normal-swiper w-full items-center justify-center flex flex-col my-32"
+            "normal-swiper w-full items-center justify-center flex flex-col my-8"
           }
           spaceBetween={50}
           slidesPerView={1}
           autoplay={true}
           loop={true}
           speed={1000}
-          style={{ minHeight: cHeight }}
         >
           {sliderData?.map((slide, i) => {
             const { videoOrigen } = slide;
@@ -158,7 +157,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
             );
           })}
           <div
-            className="font-sans text-xs text-center mb-24"
+            className="font-sans text-xs text-center mb-8"
             dangerouslySetInnerHTML={{ __html: credits }}
           />
         </Swiper>
@@ -178,7 +177,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
             // {sliderData && (
             //   <Swiper
             //     className={
-            //       "normal-swiper w-full items-center justify-center flex flex-col my-32"
+            //       "normal-swiper w-full items-center justify-center flex flex-col my-8"
             //     }
             //     key={1+'v'}
             //     spaceBetween={50}
