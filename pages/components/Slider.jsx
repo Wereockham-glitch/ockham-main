@@ -2,13 +2,14 @@ import Image from "next/image";
 // import function to register Swiper custom elements
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import { Autoplay } from "swiper";
-SwiperCore.use([Autoplay]);
+import { Autoplay, EffectFade } from "swiper";
+SwiperCore.use([Autoplay, EffectFade]);
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/autoplay";
+import "swiper/css/effect-fade";
 import { use100vh } from "react-div-100vh";
-import { useRef, useState } from "react";
+import { useRef, useState } from "react"; 
 // import { register } from 'swiper/element/bundle';
 // register Swiper custom elements
 
