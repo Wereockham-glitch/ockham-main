@@ -2,25 +2,34 @@ import { useRef } from "react";
 import Scrollbars from "react-custom-scrollbars-2";
 
 const ScrollerHome = ({ height, children }) => {
+  const scrollbarRef = useRef();
+
   const onScroll = (e) => {
-    // console.log(e.target.scrollTop, e.target.scrollHeight - window.innerHeight);
-    if (e.target.scrollTop >= e.target.scrollHeight - window.innerHeight - 20) {
-      // console.log('bottom',)
-      e.target.scrollTop = 0;
+    const scrollTop = e.target.scrollTop;
+    const totalHeight = e.target.scrollHeight;
+
+    // Como duplicamos children, la mitad es el bloque original
+    const halfHeight = totalHeight / 2;
+
+    if (scrollTop >= halfHeight) {
+      e.target.scrollTop = scrollTop - halfHeight;
     }
   };
-  const scrollbarRef = useRef()
-  const onScrollStopCallback = ()=>{
-   const lastScroll =scrollbarRef.current.getScrollTop()
-   scrollbarRef.current.scrollTop(lastScroll)
-  }
+
+  const onScrollStopCallback = () => {
+    if (!scrollbarRef.current) return;
+
+    const lastScroll = scrollbarRef.current.getScrollTop();
+    scrollbarRef.current.scrollTop(lastScroll);
+  };
+
   return (
     <Scrollbars
-    ref={scrollbarRef}
-    onScrollStop={()=>onScrollStopCallback()}
+      ref={scrollbarRef}
+      onScrollStop={onScrollStopCallback}
       className="view isolate overflow-hidden bg-white"
       universal={true}
-      onScroll={(e) => onScroll(e)}
+      onScroll={onScroll}
       hideTracksWhenNotNeeded={true}
       renderTrackHorizontal={(props) => (
         <div {...props} className="track-horizontal" />
@@ -37,9 +46,12 @@ const ScrollerHome = ({ height, children }) => {
       renderView={(props) => (
         <div {...props} className="overflow-x-hidden-important" />
       )}
-      style={{ height: height }}
+      style={{ height }}
     >
-      {children}
+      <>
+        {children}
+        {children}
+      </>
     </Scrollbars>
   );
 };
