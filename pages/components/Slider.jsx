@@ -49,7 +49,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
     delay: 4000,
     disableOnInteraction: false,
   }}
-  loop={true}
+  loop={false}
   loopAdditionalSlides={3}
   speed={1800}
 >
