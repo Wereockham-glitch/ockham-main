@@ -40,17 +40,19 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
                       }
                     > */}
       {sliderData && (
-        <Swiper
-        key={1+'a'}
-          className={
-            "normal-swiper w-full items-center justify-center flex flex-col my-8"
-          }
-          spaceBetween={50}
-          slidesPerView={1}
-          autoplay={true}
-          loop={true}
-          speed={1000}
-        >
+<Swiper
+  key={1 + "a"}
+  className="normal-swiper w-full items-center justify-center flex flex-col my-8"
+  spaceBetween={50}
+  slidesPerView={1}
+  autoplay={{
+    delay: 4000,
+    disableOnInteraction: false,
+  }}
+  loop={true}
+  loopAdditionalSlides={3}
+  speed={1800}
+>
           {sliderData?.map((slide, i) => {
             const { videoOrigen } = slide;
             return (
