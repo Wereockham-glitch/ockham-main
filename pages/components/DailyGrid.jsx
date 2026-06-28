@@ -1,17 +1,17 @@
 import Image from "next/image";
 
 const layouts = [
-  { span: 3, start: 1, y: 0 },      // 1
+  { span: 3, start: 1, y: 20 },      // 1
 
-  { span: 2, start: 5, y: 80 },     // 2 pequeña, un poco abajo
-  { span: 3, start: 7, y: 10 },     // 3 menos grande y más arriba
+  { span: 2, start: 5, y: 150 },     // 2 pequeña, un poco abajo
+  { span: 3, start: 7, y: 20 },     // 3 menos grande y más arriba
 
   { span: 2, start: 11, y: 120 },   // 4 derecha
 
   { span: 2, start: 2, y: 60 },     // 5
   { span: 3, start: 6, y: 180 },    // 6
   { span: 2, start: 10, y: 100 },   // 7
-];
+];  
 
 const DailyGrid = ({ images }) => {
   return (
