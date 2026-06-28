@@ -3,7 +3,7 @@ import Image from "next/image";
 const layouts = [
   { span: 3, start: 1, y: 20 },      // 1
 
-  { span: 2, start: 5, y: 150 },     // 2 pequeña, un poco abajo
+  { span: 2, start: 5, y: 220 },     // 2 pequeña, un poco abajo
   { span: 3, start: 7, y: 20 },     // 3 menos grande y más arriba
 
   { span: 2, start: 11, y: 120 },   // 4 derecha
