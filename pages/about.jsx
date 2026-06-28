@@ -22,14 +22,14 @@ export default function About({ page = undefined }) {
   title={page?.page?.seo?.title || "About — OCKHAM"}
   description={
     page?.page?.seo?.metaDesc ||
-    "OCKHAM is a directing duo based between Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling."
+    "OCKHAM is a directing duo based in Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling."
   }
   openGraph={{
     url: "https://ockham.studio/about",
     title: page?.page?.seo?.title || "About — OCKHAM",
     description:
       page?.page?.seo?.metaDesc ||
-      "OCKHAM is a directing duo based between Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling.",
+      "OCKHAM is a directing duo based in Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling.",
     images: [
       {
         url: "https://ockham.studio/img/about.jpg",
@@ -58,7 +58,7 @@ export default function About({ page = undefined }) {
   >
     <div className="space-y-1">
       <p>
-        We’re <strong>OCKHAM</strong>, a directing duo based between Madrid, by
+        We’re <strong>OCKHAM</strong>, a directing duo based in Madrid, by
         Lucas Couto and Cora Patiño.
       </p>
 
