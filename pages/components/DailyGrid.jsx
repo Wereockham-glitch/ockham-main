@@ -23,7 +23,7 @@ const layouts = [
   { span: 3, start: 1, y: 280 },
   { span: 2, start: 5, y: 520 },
   { span: 3, start: 9, y: 260 },
-  { span: 2, start: 2, y: 340 },
+  { span: 2, start: 11, y: 340 },
   { span: 2, start: 2, y: 320 },
   { span: 3, start: 6, y: 420 },
   { span: 2, start: 10, y: 360 },
