@@ -80,7 +80,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
   }, []);
 
   return (
-  <div className="mt-12 pb-[25vh]">
+  <div className="mt-12">
       {proyectos?.map((p, i) => {
         const { contenidoProyecto } = p;
         const { sliderYCrDitos } = contenidoProyecto;
@@ -97,7 +97,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
   className={`${
     fullscreen ? `opacity-0` : `opacity-100`
   } transition-opacity ${
-    i === proyectos.length - 1 ? "pb-[20vh]" : ""
+    i === proyectos.length - 1 ? "mt-[6vh]" : ""
   }`}
   id={`st-${i}`}
   key={i}
