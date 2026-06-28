@@ -25,7 +25,7 @@ const layouts = [
   { span: 3, start: 10, y: 260 },
   { span: 2, start: 2, y: 320 },
   { span: 3, start: 6, y: 420 },
-  { span: 2, start: 9, y: 360 },
+  { span: 2, start: 10, y: 360 },
 ];
 
 const DailyGrid = ({ images }) => {
