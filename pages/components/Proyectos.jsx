@@ -80,7 +80,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
   }, []);
 
   return (
-  <div className="mt-12 pb-[10vh]">
+  <div className="mt-4 pb-[10vh]">
     {proyectos?.map((p, i) => {
       const { contenidoProyecto } = p;
       const { sliderYCrDitos } = contenidoProyecto;
