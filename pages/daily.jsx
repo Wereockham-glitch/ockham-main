@@ -19,6 +19,7 @@ export default function Daily() {
   "/img/daily/15.jpg",
   "/img/daily/16.jpg",
   "/img/daily/17.jpg",
+  "/img/daily/18.jpg",
   "/img/daily/19.jpg",
   "/img/daily/20.jpg",
   "/img/daily/21.jpg",
