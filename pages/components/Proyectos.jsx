@@ -80,7 +80,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
   }, []);
 
   return (
-    <div className="mt-12">
+  <div className="mt-12 pb-[25vh]">
       {proyectos?.map((p, i) => {
         const { contenidoProyecto } = p;
         const { sliderYCrDitos } = contenidoProyecto;
@@ -94,13 +94,15 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
         }
         return (
           <div
-            className={`${
-              fullscreen ? `opacity-0` : `opacity-100`
-            } transition-opacity`}
-            id={`st-${i}`}
-            key={i}
-            ref={(el) => (elsRef.current = [...elsRef.current, el])}
-          >
+  className={`${
+    fullscreen ? `opacity-0` : `opacity-100`
+  } transition-opacity ${
+    i === proyectos.length - 1 ? "pb-[20vh]" : ""
+  }`}
+  id={`st-${i}`}
+  key={i}
+  ref={(el) => (elsRef.current = [...elsRef.current, el])}
+>
             {/* <div>{p.title}</div> */}
             {mosaico && (
               <Mosaico
