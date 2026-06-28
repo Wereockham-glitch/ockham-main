@@ -82,16 +82,14 @@ export default function Home({ page = undefined, fullscreen, setFullscreen }) {
     description:
       "OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling.",
     images: [
-      {
-        url:
-          seo?.opengraphImage?.sourceUrl ||
-          "https://ockham.studio/img/about.jpg",
-        width: 1200,
-        height: 630,
-        alt: "OCKHAM — Directing Duo",
-        type: "image/jpeg",
-      },
-    ],
+  {
+    url: "https://ockham.studio/img/about.jpg",
+    width: 1200,
+    height: 630,
+    alt: "OCKHAM — Directing Duo",
+    type: "image/jpeg",
+  },
+],
     siteName: "OCKHAM",
   }}
   twitter={{
