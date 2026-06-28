@@ -6,7 +6,6 @@ import { getApolloClient } from "@/lib/apollo";
 import { gql } from "@apollo/client";
 
 export default function About({ page = undefined }) {
-  const router = useRouter();
   const [showOverlay, setShowOverlay] = useState(false);
 
   const goHome = () => {
