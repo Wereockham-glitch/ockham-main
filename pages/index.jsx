@@ -45,32 +45,32 @@ export default function Home({ page = undefined, fullscreen, setFullscreen }) {
         />
       </Head>
       <NextSeo
-        title={seo?.title}
-        description={
-          "OCKHAM is a film director. We see the image as a space for expression and communication."
-        }
-        openGraph={{
-          url: "https://ockham.studio",
-          title: seo?.title,
-          description:
-            "OCKHAM is a film director. We see the image as a space for expression and communication.",
-          images: [
-            {
-              url: seo?.opengraphImage.sourceUrl,
-              width: 200,
-              height: 200,
-              alt: "OCKHAM is a film director. We see the image as a space for expression and communication.",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: seo?.title,
-        }}
-        twitter={{
-          handle: "@handle",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      />
+  title={seo?.title || "OCKHAM — Directing Duo"}
+  description={
+    seo?.metaDesc ||
+    "OCKHAM is a directing duo based in Madrid, working across commercials, films and visual storytelling. We create emotionally driven images shaped by cinematic precision and contemporary culture."
+  }
+  openGraph={{
+    url: "https://ockham.studio",
+    title: seo?.title || "OCKHAM — Directing Duo",
+    description:
+      seo?.metaDesc ||
+      "OCKHAM is a directing duo based in Madrid, working across commercials, films and visual storytelling. We create emotionally driven images shaped by cinematic precision and contemporary culture.",
+    images: [
+      {
+        url: seo?.opengraphImage?.sourceUrl,
+        width: 1200,
+        height: 630,
+        alt: "OCKHAM — Directing Duo",
+        type: "image/jpeg",
+      },
+    ],
+    siteName: "OCKHAM",
+  }}
+  twitter={{
+    cardType: "summary_large_image",
+  }}
+/>
 
       <div className="animate__animated animate__fadeIn  bg-white">
         <Cabecera
