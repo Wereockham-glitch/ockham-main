@@ -114,7 +114,9 @@ const Mosaico = ({
                 ` overflow-hidden  flex items-start flex-col  justify-center relative `
               }
             >
-              <div className="font-sans text-xs mb-2 select-none"> {index}</div>
+              <div className="font-condensed text-[10px] tracking-[-0.02em] mb-1 select-none">
+  {index}
+</div>
               <div className="relative w-full">
                 {base64field ? (
                   <Image
@@ -190,7 +192,9 @@ const Mosaico = ({
               key={i}
               className={`overflow-hidden  col-span-12 flex items-start flex-col  justify-center relative `}
             >
-              <div className="font-sans text-xs mb-2 select-none"> {index}</div>
+              <div className="font-condensed text-[10px] tracking-[-0.02em] mb-1 select-none">
+  {index}
+</div>
               <div className="w-full relative">
                 {base64field ? (
                   <Image
