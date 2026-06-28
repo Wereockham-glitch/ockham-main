@@ -19,19 +19,19 @@ const layouts = [
   { span: 3, start: 6, y: 280 },
   { span: 2, start: 10, y: 260 },
 
-  // NEW BLOCK (15–21)
+  // NEW BLOCK (15–21) — adjusted
   { span: 3, start: 1, y: 280 },
-  { span: 2, start: 6, y: 520 },
+  { span: 2, start: 6, y: 280 }, // antes 520
   { span: 3, start: 10, y: 260 },
   { span: 2, start: 8, y: 340 },
   { span: 2, start: 2, y: 320 },
-  { span: 3, start: 6, y: 420 },
-  { span: 2, start: 10, y: 360 },
+  { span: 3, start: 6, y: 260 }, // antes 420
+  { span: 2, start: 10, y: 220 }, // antes 360
 ];
 
 const DailyGrid = ({ images }) => {
   return (
-    <div className="grid grid-cols-12 px-4 gap-y-16 pt-8 pb-32">
+    <div className="grid grid-cols-12 px-4 gap-y-8 pt-8 pb-32">
       {images?.map((img, i) => {
         const layout = layouts[i];
 
