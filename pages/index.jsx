@@ -39,11 +39,40 @@ export default function Home({ page = undefined, fullscreen, setFullscreen }) {
   return (
     <>
       <Head>
-        <meta
-          name="google-site-verification"
-          content="M8O_jObW0JmqCHH2V8LlQjB28AxWR2dUy4NcWwLNUXU"
-        />
-      </Head>
+  <meta
+    name="google-site-verification"
+    content="M8O_jObW0JmqCHH2V8LlQjB28AxWR2dUy4NcWwLNUXU"
+  />
+
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "OCKHAM",
+        url: "https://ockham.studio",
+        logo: "https://ockham.studio/favicon.ico",
+        description:
+          "OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling.",
+        sameAs: [
+          "https://www.instagram.com/ockham.duo/",
+          "https://vimeo.com/ockhamduo"
+        ],
+        founder: [
+          {
+            "@type": "Person",
+            name: "Lucas Couto"
+          },
+          {
+            "@type": "Person",
+            name: "Cora Patiño"
+          }
+        ]
+      }),
+    }}
+  />
+</Head>
       <NextSeo
   title={seo?.title || "OCKHAM — Directing Duo"}
   description={
