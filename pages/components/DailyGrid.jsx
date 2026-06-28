@@ -11,8 +11,8 @@ const layouts = [
   { span: 2, start: 10, y: 100 },
 
   // NEW BLOCK (8–14)
-  { span: 3, start: 1, y: 80 },
-  { span: 2, start: 4, y: 420 },
+  { span: 3, start: 2, y: 40 },
+  { span: 2, start: 3, y: 420 },
   { span: 3, start: 7, y: 180 },
   { span: 2, start: 11, y: 240 },
   { span: 3, start: 2, y: 220 },
