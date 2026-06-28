@@ -80,29 +80,31 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
   }, []);
 
   return (
-  <div className="mt-12">
-      {proyectos?.map((p, i) => {
-        const { contenidoProyecto } = p;
-        const { sliderYCrDitos } = contenidoProyecto;
-        const { collage } = contenidoProyecto;
-        const slider = sliderYCrDitos;
-        const { mosaico } = contenidoProyecto;
-        const videoOrigen = contenidoProyecto?.videoOrigen
-        let imagePriority = false;
-        if (i <= 30) {
-          imagePriority = true;
-        }
-        return (
-          <div
-  className={`${
-    fullscreen ? `opacity-0` : `opacity-100`
-  } transition-opacity ${
-    i === proyectos.length - 1 ? "mt-[6vh]" : ""
-  }`}
-  id={`st-${i}`}
-  key={i}
-  ref={(el) => (elsRef.current = [...elsRef.current, el])}
->
+  <div className="mt-12 pb-[10vh]">
+    {proyectos?.map((p, i) => {
+      const { contenidoProyecto } = p;
+      const { sliderYCrDitos } = contenidoProyecto;
+      const { collage } = contenidoProyecto;
+      const slider = sliderYCrDitos;
+      const { mosaico } = contenidoProyecto;
+      const videoOrigen = contenidoProyecto?.videoOrigen;
+
+      let imagePriority = false;
+      if (i <= 30) {
+        imagePriority = true;
+      }
+
+      return (
+        <div
+          className={`${
+            fullscreen ? "opacity-0" : "opacity-100"
+          } transition-opacity ${
+            i === proyectos.length - 1 ? "mt-[4vh]" : ""
+          }`}
+          id={`st-${i}`}
+          key={i}
+          ref={(el) => (elsRef.current = [...elsRef.current, el])}
+        >
             {/* <div>{p.title}</div> */}
             {mosaico && (
               <Mosaico
