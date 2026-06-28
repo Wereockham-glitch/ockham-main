@@ -74,20 +74,18 @@ export default function Home({ page = undefined, fullscreen, setFullscreen }) {
   />
 </Head>
       <NextSeo
-  title={seo?.title || "OCKHAM — Directing Duo"}
-  description={
-    seo?.metaDesc ||
-    "OCKHAM is a directing duo based in Madrid, working across commercials, films and visual storytelling. We create emotionally driven images shaped by cinematic precision and contemporary culture."
-  }
+  title="OCKHAM — Directing Duo | Lucas Couto & Cora Patiño"
+  description="OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling."
   openGraph={{
     url: "https://ockham.studio",
-    title: seo?.title || "OCKHAM — Directing Duo",
+    title: "OCKHAM — Directing Duo | Lucas Couto & Cora Patiño",
     description:
-      seo?.metaDesc ||
-      "OCKHAM is a directing duo based in Madrid, working across commercials, films and visual storytelling. We create emotionally driven images shaped by cinematic precision and contemporary culture.",
+      "OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling.",
     images: [
       {
-        url: seo?.opengraphImage?.sourceUrl,
+        url:
+          seo?.opengraphImage?.sourceUrl ||
+          "https://ockham.studio/img/about.jpg",
         width: 1200,
         height: 630,
         alt: "OCKHAM — Directing Duo",
