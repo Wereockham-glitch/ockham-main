@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 import Image from "next/image";
+import { NextSeo } from "next-seo";
 import AboutImage from "../public/img/about.jpg";
 import { getApolloClient } from "@/lib/apollo";
 import { gql } from "@apollo/client";
@@ -19,6 +19,29 @@ export default function About({ page = undefined }) {
 
   return (
     <>
+    <NextSeo
+  title={page?.page?.seo?.title || "About — OCKHAM"}
+  description={
+    page?.page?.seo?.metaDesc ||
+    "OCKHAM is a directing duo based between Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling."
+  }
+  openGraph={{
+    url: "https://ockham.studio/about",
+    title: page?.page?.seo?.title || "About — OCKHAM",
+    description:
+      page?.page?.seo?.metaDesc ||
+      "OCKHAM is a directing duo based between Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling.",
+    images: [
+      {
+        url: "https://ockham.studio/img/about.jpg",
+        width: 1200,
+        height: 630,
+        alt: "OCKHAM About",
+      },
+    ],
+    siteName: "OCKHAM",
+  }}
+/>
       {/* White transition overlay */}
       <div
         className={`fixed inset-0 z-[99999] pointer-events-none backdrop-blur-md transition-all duration-[1500ms] ${
