@@ -23,11 +23,15 @@ const Mosaico = ({
           const { yPosition } = m;
           const { image } = m;
           const sourceUrl = image?.sourceUrl;
-          const base64 = image?.base64;
           const base64field = image?.base64field;
           const mediaDetails = image?.mediaDetails;
           const altText = image?.image;
           const video = m?.video;
+
+          const isSquare =
+            mediaDetails?.width &&
+            mediaDetails?.height &&
+            Math.abs(mediaDetails.width - mediaDetails.height) < 20;
 
           let imageSize;
           switch (size) {
@@ -39,16 +43,13 @@ const Mosaico = ({
               break;
             case "4_col":
               imageSize = " col-span-12 md:col-span-4";
-
               break;
             case "5_col":
               imageSize = " col-span-12 md:col-span-5";
-
               break;
             case "6_col":
               imageSize = " col-span-12 md:col-span-6";
               break;
-
             default:
               break;
           }
@@ -59,42 +60,38 @@ const Mosaico = ({
               imageStart = " md:col-start-1";
               break;
             case "2_start":
-              imageStart = "   md:col-start-2";
+              imageStart = " md:col-start-2";
               break;
             case "3_start":
-              imageStart = "   md:col-start-3";
-
+              imageStart = " md:col-start-3";
               break;
             case "4_start":
               imageStart = " md:col-start-4";
-
               break;
             case "5_start":
-              imageStart = "  md:col-start-5";
+              imageStart = " md:col-start-5";
               break;
             case "6_start":
-              imageStart = "   md:col-start-6";
+              imageStart = " md:col-start-6";
               break;
             case "7_start":
-              imageStart = "   md:col-start-7";
+              imageStart = " md:col-start-7";
               break;
             case "8_start":
-              imageStart = "   md:col-start-8";
+              imageStart = " md:col-start-8";
               break;
             case "9_start":
-              imageStart = "  md:col-start-9";
+              imageStart = " md:col-start-9";
               break;
             case "10_start":
-              imageStart = "   md:col-start-10";
+              imageStart = " md:col-start-10";
               break;
-
             case "11_start":
-              imageStart = "   md:col-start-11";
+              imageStart = " md:col-start-11";
               break;
             case "12_start":
-              imageStart = "   md:col-start-12";
+              imageStart = " md:col-start-12";
               break;
-
             default:
               break;
           }
@@ -111,13 +108,14 @@ const Mosaico = ({
               className={
                 `${imageStart}` +
                 `${imageSize}` +
-                ` overflow-hidden  flex items-start flex-col  justify-center relative `
+                ` overflow-hidden flex items-start flex-col justify-center relative`
               }
             >
               <div className="font-condensed text-[10px] tracking-[-0.02em] mb-1 select-none">
-  {index}
-</div>
-              <div className="relative w-full">
+                {index}
+              </div>
+
+              <div className={`relative ${isSquare ? "w-[65%]" : "w-full"}`}>
                 {base64field ? (
                   <Image
                     alt={altText ? altText : image?.title}
@@ -125,27 +123,25 @@ const Mosaico = ({
                     width={mediaDetails?.width}
                     height={mediaDetails?.height}
                     className={
-                      videoOrigen && `w-full h-full border border-white`
+                      videoOrigen ? "w-full h-full border border-white" : ""
                     }
                     blurDataURL={base64field}
-                    placeholder={'blur'}
+                    placeholder="blur"
                     priority={imagePriority}
                     quality={100}
-
                   />
                 ) : (
                   <Image
                     alt={altText ? altText : image?.title}
                     src={sourceUrl}
-                    loading={imagePriority?'eager':'lazy'}
+                    loading={imagePriority ? "eager" : "lazy"}
                     width={mediaDetails?.width}
                     height={mediaDetails?.height}
                     className={
-                      videoOrigen && `w-full h-full border border-white`
+                      videoOrigen ? "w-full h-full border border-white" : ""
                     }
                     priority={imagePriority}
                     quality={100}
-
                   />
                 )}
 
@@ -154,14 +150,15 @@ const Mosaico = ({
                     loop
                     autoPlay
                     muted
-                    poster={""}
-                    preload={"none"}
+                    poster=""
+                    preload="none"
                     playsInline
-                    data-src={video && video}
+                    data-src={video}
                     alt={altText ? altText : image?.title}
-                    className={`mx-auto  transition-all hidden md:block w-full h-full z-40  object-cover absolute  top-0 ${
-                      videoOrigen &&
-                      ` cursor-pointer border-yellow-400 md:border-transparent hover:border-yellow-400 border `
+                    className={`mx-auto transition-all hidden md:block w-full h-full z-40 object-cover absolute top-0 ${
+                      videoOrigen
+                        ? "cursor-pointer border-yellow-400 md:border-transparent hover:border-yellow-400 border"
+                        : ""
                     }`}
                   >
                     <source src={video} type="video/mp4" />
@@ -176,25 +173,22 @@ const Mosaico = ({
       <div className="grid md:hidden grid-cols-12 gap-y-20 gap-x-4 px-4 py-32">
         {mosaico?.map((m, i) => {
           const { index } = m;
-
-          const { xPosition } = m;
-          const { yPosition } = m;
           const { image } = m;
           const sourceUrl = image?.sourceUrl;
-          const sizes = image?.sizes;
-          const base64 = image?.base64;
           const base64field = image?.base64field;
           const mediaDetails = image?.mediaDetails;
           const altText = image?.image;
           const video = m?.video;
+
           return (
             <div
               key={i}
-              className={`overflow-hidden  col-span-12 flex items-start flex-col  justify-center relative `}
+              className="overflow-hidden col-span-12 flex items-start flex-col justify-center relative"
             >
               <div className="font-condensed text-[10px] tracking-[-0.02em] mb-1 select-none">
-  {index}
-</div>
+                {index}
+              </div>
+
               <div className="w-full relative">
                 {base64field ? (
                   <Image
@@ -204,7 +198,7 @@ const Mosaico = ({
                     width={mediaDetails?.width}
                     height={mediaDetails?.height}
                     className={
-                      videoOrigen && `w-full h-full border border-white`
+                      videoOrigen ? "w-full h-full border border-white" : ""
                     }
                     blurDataURL={base64field}
                     priority={imagePriority}
@@ -215,28 +209,28 @@ const Mosaico = ({
                     src={sourceUrl}
                     width={mediaDetails?.width}
                     height={mediaDetails?.height}
-                    loading={imagePriority?'eager':'lazy'}
-
+                    loading={imagePriority ? "eager" : "lazy"}
                     className={
-                      videoOrigen && `w-full h-full border border-white`
+                      videoOrigen ? "w-full h-full border border-white" : ""
                     }
                     priority={imagePriority}
                   />
                 )}
+
                 {video && (
                   <video
                     loop
                     autoPlay
                     muted
-                    // ref={el}
-                    poster={""}
-                    preload={"none"}
+                    poster=""
+                    preload="none"
                     playsInline
-                    data-src={video && video}
+                    data-src={video}
                     alt={altText ? altText : image?.title}
-                    className={`mx-auto transition-all hidden md:block w-full h-full z-40  object-cover absolute  top-0${
-                      videoOrigen &&
-                      `border-yellow-400 md:border-transparent cursor-pointer hover:border-yellow-400 border `
+                    className={`mx-auto transition-all hidden md:block w-full h-full z-40 object-cover absolute top-0 ${
+                      videoOrigen
+                        ? "border-yellow-400 md:border-transparent cursor-pointer hover:border-yellow-400 border"
+                        : ""
                     }`}
                   >
                     <source src={video} type="video/mp4" />
