@@ -1,14 +1,37 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Scrollbars from "react-custom-scrollbars-2";
 import Header from "./Header";
-import CustomCursor from "./CustomCursor";
 
 const Scroller = ({ height, fullscreen, setFullscreen, children }) => {
-  const scrollbarRef = useRef();
+  const isJumping = useRef(false);
+
+  const handleScroll = (event) => {
+    if (isJumping.current) return;
+
+    const view = event.target;
+    const cycles = view.querySelectorAll("[data-infinite-cycle]");
+    const [firstCycle, secondCycle] = cycles;
+    const threshold = 20;
+
+    if (!firstCycle || !secondCycle) return;
+
+    const cycleHeight = firstCycle.offsetHeight;
+    const secondCycleBottom = secondCycle.offsetTop + secondCycle.offsetHeight;
+    const loopStart = secondCycleBottom - view.clientHeight - threshold;
+
+    if (cycleHeight > 0 && loopStart > 0 && view.scrollTop >= loopStart) {
+      isJumping.current = true;
+      view.scrollTop = view.scrollTop - cycleHeight;
+
+      requestAnimationFrame(() => {
+        isJumping.current = false;
+      });
+    }
+  };
 
   return (
     <Scrollbars
-      ref={scrollbarRef}
+      onScroll={handleScroll}
       className="view isolate overflow-hidden bg-white"
       universal={true}
       hideTracksWhenNotNeeded={true}
@@ -25,7 +48,6 @@ const Scroller = ({ height, fullscreen, setFullscreen, children }) => {
     >
       <Header setFullscreen={setFullscreen} fullscreen={fullscreen} />
       {children}
-      {/* <CustomCursor /> */}
     </Scrollbars>
   );
 };

@@ -63,7 +63,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
   };
 
   const createObserver = (elsRef, observer) => {
-    if (elsRef.current && observer)
+     if (elsRef.current && observer)
       elsRef.current.forEach((el) => {
         if (el) {
           observer.observe(el);
@@ -78,6 +78,8 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
       createObserver(elsRef, observer);
     }
   }, []);
+
+  elsRef.current = [];
 
   return (
   <div className="mt-4 pb-[10vh]">
@@ -103,7 +105,9 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen }) => {
           }`}
           id={`st-${i}`}
           key={i}
-          ref={(el) => (elsRef.current = [...elsRef.current, el])}
+          ref={(el) => {
+  elsRef.current[i] = el;
+}}
         >
             {/* <div>{p.title}</div> */}
             {mosaico && (
