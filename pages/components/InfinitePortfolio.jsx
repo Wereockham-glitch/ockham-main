@@ -4,6 +4,7 @@ const InfinitePortfolio = ({
   listadoProyectos,
   fullscreen,
   setFullscreen,
+  setFullscreenUrl,
 }) => {
   return (
   <>
@@ -12,6 +13,7 @@ const InfinitePortfolio = ({
         listadoProyectos={listadoProyectos}
         fullscreen={fullscreen}
         setFullscreen={setFullscreen}
+        setFullscreenUrl={setFullscreenUrl}
       />
     </div>
 
@@ -20,6 +22,7 @@ const InfinitePortfolio = ({
         listadoProyectos={listadoProyectos}
         fullscreen={fullscreen}
         setFullscreen={setFullscreen}
+        setFullscreenUrl={setFullscreenUrl}
       />
     </div>
   </>

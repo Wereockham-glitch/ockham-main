@@ -24,6 +24,7 @@ import CustomCursor from "./components/CustomCursor";
 
 export default function App({ Component, pageProps }) {
   const [fullscreen, setFullscreen] = useState();
+  const [fullscreenUrl, setFullscreenUrl] = useState();
   return (
     <div
       className={`${conFont.variable} ${normalFont.variable} ${normalBoldFont.variable}`}
@@ -32,6 +33,8 @@ export default function App({ Component, pageProps }) {
         <Component
           setFullscreen={setFullscreen}
           fullscreen={fullscreen}
+          fullscreenUrl={fullscreenUrl}
+          setFullscreenUrl={setFullscreenUrl}
           {...pageProps}
         />
       </Layout>

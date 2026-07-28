@@ -6,6 +6,7 @@
     import dynamic from "next/dynamic";
     import { NextSeo } from "next-seo";
     import Head from "next/head";
+    import Fullscreen from "./components/Fullscreen";
     const Cabecera = dynamic(() => import("./components/Cabecera"), {
       ssr: true,
     });
@@ -16,7 +17,7 @@
         ssr: true,
       }
     );
-    export default function Home({ page = undefined, fullscreen, setFullscreen }) {
+    export default function Home({ page = undefined, fullscreen, setFullscreen, fullscreenUrl, setFullscreenUrl }) {
       const height = use100vh();
       const cHeight = height ? height : "100vh";
       const cHeightFooter = height + 15 ? height + 15 : "calc(100vh + 15px)";
@@ -115,6 +116,7 @@
             <InfinitePortfolio
   fullscreen={fullscreen}
   setFullscreen={setFullscreen}
+  setFullscreenUrl={setFullscreenUrl}
   listadoProyectos={listadoProyectos}
 />
             <Cabecera
@@ -126,6 +128,11 @@
               videoCabecera={videoCabecera}
               videoCabeceraRef={videoCabeceraRef}
               fullscreen={fullscreen}
+              setFullscreen={setFullscreen}
+            />
+            <Fullscreen
+              fullscreen={fullscreen}
+              fullscreenUrl={fullscreenUrl}
               setFullscreen={setFullscreen}
             />
           </div>
