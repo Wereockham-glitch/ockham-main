@@ -7,6 +7,7 @@
     import { NextSeo } from "next-seo";
     import Head from "next/head";
     import Fullscreen from "./components/Fullscreen";
+    import Thumb from "./components/Thumb";
     const Cabecera = dynamic(() => import("./components/Cabecera"), {
       ssr: true,
     });
@@ -22,6 +23,8 @@
       const cHeight = height ? height : "100vh";
       const cHeightFooter = height + 15 ? height + 15 : "calc(100vh + 15px)";
       const cHeightCabecera = height + 48 ? height + 48 : "calc(100vh + 48px)";
+      const [activeThumb, setActiveThumb] = useState();
+      const [thumbs, setThumbs] = useState([]);
 
       const { listadoProyectos } = page?.page;
       const { cabecera } = page?.page;
@@ -117,6 +120,8 @@
   fullscreen={fullscreen}
   setFullscreen={setFullscreen}
   setFullscreenUrl={setFullscreenUrl}
+  setActiveThumb={setActiveThumb}
+  setThumbs={setThumbs}
   listadoProyectos={listadoProyectos}
 />
             <Cabecera
@@ -129,6 +134,13 @@
               videoCabeceraRef={videoCabeceraRef}
               fullscreen={fullscreen}
               setFullscreen={setFullscreen}
+            />
+            <Thumb
+              fullscreen={fullscreen}
+              setFullscreen={setFullscreen}
+              setFullscreenUrl={setFullscreenUrl}
+              activeThumb={activeThumb}
+              thumbs={thumbs}
             />
             <Fullscreen
               fullscreen={fullscreen}

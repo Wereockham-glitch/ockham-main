@@ -2,13 +2,17 @@ import Mosaico from "./Mosaico";
 import Slider from "./Slider";
 
 import Collage from "./SliderCollage";
-import Thumb from "./Thumb";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useCallback } from "react";
 
-const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen, setFullscreenUrl }) => {
+const Proyectos = ({
+  listadoProyectos,
+  fullscreen,
+  setFullscreen,
+  setFullscreenUrl,
+  setActiveThumb,
+  setThumbs,
+}) => {
   const proyectos = listadoProyectos?.proyectos;
-  const [activeThumb, setActiveThumb] = useState();
-  const [thumbs, setThumbs] = useState([]);
 
   useEffect(() => {
     if (proyectos && proyectos.length > 0) {
@@ -34,11 +38,11 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen, setFullscreenU
       const updatedThumbs = Array.from(urlMap.values());
       setThumbs(updatedThumbs);
     }
-  }, [proyectos]);
+  }, [proyectos, setThumbs]);
 
   const elsRef = useRef([]);
 
-  const handleIntersect = (entries) => {
+  const handleIntersect = useCallback((entries) => {
     const [entry] = entries;
     const videos = entry.target.querySelectorAll("video");
     videos.forEach((video) => {
@@ -57,7 +61,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen, setFullscreenU
     if (entry.isIntersecting) {
       setActiveThumb(entry.target.id);
     }
-  };
+  }, [setActiveThumb]);
 
   const createObserver = (elsRef, observer) => {
      if (elsRef.current && observer)
@@ -74,7 +78,7 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen, setFullscreenU
     if (elsRef.current && observer) {
       createObserver(elsRef, observer);
     }
-  }, []);
+  }, [handleIntersect]);
 
   elsRef.current = [];
 
@@ -133,14 +137,6 @@ const Proyectos = ({ listadoProyectos, fullscreen, setFullscreen, setFullscreenU
         );
       })}
 
-      <Thumb
-        fullscreen={fullscreen}
-        setFullscreen={setFullscreen}
-        setFullscreenUrl={setFullscreenUrl}
-        proyectos={proyectos}
-        activeThumb={activeThumb}
-        thumbs={thumbs}
-      />
     </div>
   );
 };

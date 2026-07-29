@@ -5,6 +5,8 @@ const InfinitePortfolio = ({
   fullscreen,
   setFullscreen,
   setFullscreenUrl,
+  setActiveThumb,
+  setThumbs,
 }) => {
   return (
   <>
@@ -14,6 +16,8 @@ const InfinitePortfolio = ({
         fullscreen={fullscreen}
         setFullscreen={setFullscreen}
         setFullscreenUrl={setFullscreenUrl}
+        setActiveThumb={setActiveThumb}
+        setThumbs={setThumbs}
       />
     </div>
 
@@ -23,6 +27,8 @@ const InfinitePortfolio = ({
         fullscreen={fullscreen}
         setFullscreen={setFullscreen}
         setFullscreenUrl={setFullscreenUrl}
+        setActiveThumb={setActiveThumb}
+        setThumbs={setThumbs}
       />
     </div>
   </>
