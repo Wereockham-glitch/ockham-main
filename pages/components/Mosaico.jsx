@@ -6,6 +6,7 @@ const Mosaico = ({
   setFullscreen,
   setFullscreenUrl,
   videoOrigen,
+  isWiZLight,
 }) => {
   const handleClick = (videoOrigen) => {
     setFullscreenUrl(videoOrigen);
@@ -115,7 +116,11 @@ const Mosaico = ({
                 {index}
               </div>
 
-              <div className={`relative ${isSquare ? "w-[65%]" : "w-full"}`}>
+              <div
+                className={`relative ${isSquare ? "w-[65%]" : "w-full"} ${
+                  isWiZLight ? "scale-[0.88] origin-top-left" : ""
+                }`}
+              >
                 {base64field ? (
                   <Image
                     alt={altText ? altText : image?.title}
@@ -155,14 +160,12 @@ const Mosaico = ({
                     playsInline
                     data-src={video}
                     alt={altText ? altText : image?.title}
-                    className={`mx-auto transition-all hidden md:block w-full h-full z-40 object-cover absolute top-0 ${
+                  className={`mx-auto transition-all hidden md:block w-full h-full z-40 object-cover absolute top-0 ${
                       videoOrigen
                         ? "cursor-pointer border-yellow-400 md:border-transparent hover:border-yellow-400 border"
                         : ""
                     }`}
-                  >
-                    <source src={video} type="video/mp4" />
-                  </video>
+                  />
                 )}
               </div>
             </div>
@@ -227,14 +230,12 @@ const Mosaico = ({
                     playsInline
                     data-src={video}
                     alt={altText ? altText : image?.title}
-                    className={`mx-auto transition-all hidden md:block w-full h-full z-40 object-cover absolute top-0 ${
+                  className={`mx-auto transition-all hidden md:block w-full h-full z-40 object-cover absolute top-0 ${
                       videoOrigen
                         ? "border-yellow-400 md:border-transparent cursor-pointer hover:border-yellow-400 border"
                         : ""
                     }`}
-                  >
-                    <source src={video} type="video/mp4" />
-                  </video>
+                  />
                 )}
               </div>
             </div>

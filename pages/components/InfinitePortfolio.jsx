@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Proyectos from "./Proyectos";
 
 const InfinitePortfolio = ({
@@ -35,4 +36,4 @@ const InfinitePortfolio = ({
 );
 };
 
-export default InfinitePortfolio;
+export default memo(InfinitePortfolio);

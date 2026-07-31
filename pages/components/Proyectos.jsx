@@ -91,6 +91,7 @@ const Proyectos = ({
       const slider = sliderYCrDitos;
       const { mosaico } = contenidoProyecto;
       const videoOrigen = contenidoProyecto?.videoOrigen;
+      const isWiZLight = p.id === "cG9zdDo0ODE=";
 
       let imagePriority = false;
       if (i <= 30) {
@@ -119,6 +120,7 @@ const Proyectos = ({
                 imagePriority={imagePriority}
                 mosaico={mosaico}
                 videoOrigen={videoOrigen}
+                isWiZLight={isWiZLight}
               />
             )}
             {slider && (
