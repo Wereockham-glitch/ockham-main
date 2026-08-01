@@ -301,7 +301,8 @@ const Proyectos = ({
   return (
   <div className="home-project-list mt-4 pb-[10vh]">
     {proyectos?.map((p, i) => {
-      const imagePriority = i <= 30;
+      const imagePriority =
+        variant === "mobileEditorial" ? i === 0 : i <= 30;
 
       if (variant === "mobileEditorial") {
         return (

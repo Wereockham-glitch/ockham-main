@@ -68,10 +68,14 @@ const Slider = ({
             }
             spaceBetween={50}
             slidesPerView={1}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
+            autoplay={
+              sliderData.length > 1
+                ? {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                  }
+                : false
+            }
             loop={false}
             speed={1800}
           >

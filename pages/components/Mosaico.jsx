@@ -262,7 +262,7 @@ const Mosaico = ({
                   />
                 )}
 
-                {video && (
+                {variant === "desktop" && video && (
                   <video
                     loop
                     autoPlay
