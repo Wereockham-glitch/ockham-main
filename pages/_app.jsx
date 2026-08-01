@@ -21,23 +21,26 @@ import { useState } from "react";
 import Scroller from "./components/Scroller";
 import Layout from "./components/Layout";
 import CustomCursor from "./components/CustomCursor";
+import PageTransition from "./components/PageTransition";
 
 export default function App({ Component, pageProps }) {
   const [fullscreen, setFullscreen] = useState();
   const [fullscreenUrl, setFullscreenUrl] = useState();
   return (
-    <div
-      className={`${conFont.variable} ${normalFont.variable} ${normalBoldFont.variable}`}
-    >
-      <Layout fullscreen={fullscreen} setFullscreen={setFullscreen}>
-        <Component
-          setFullscreen={setFullscreen}
-          fullscreen={fullscreen}
-          fullscreenUrl={fullscreenUrl}
-          setFullscreenUrl={setFullscreenUrl}
-          {...pageProps}
-        />
-      </Layout>
-    </div>
+    <PageTransition>
+      <div
+        className={`${conFont.variable} ${normalFont.variable} ${normalBoldFont.variable}`}
+      >
+        <Layout fullscreen={fullscreen} setFullscreen={setFullscreen}>
+          <Component
+            setFullscreen={setFullscreen}
+            fullscreen={fullscreen}
+            fullscreenUrl={fullscreenUrl}
+            setFullscreenUrl={setFullscreenUrl}
+            {...pageProps}
+          />
+        </Layout>
+      </div>
+    </PageTransition>
   );
 }

@@ -46,6 +46,36 @@
     caret-color: yellow;
   }
 }
+
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  transition-property: opacity;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-transition-overlay--exiting,
+.page-transition-overlay--covered {
+  opacity: 1;
+  pointer-events: auto;
+  transition-duration: 300ms;
+}
+
+.page-transition-overlay--entering {
+  opacity: 0;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-overlay {
+    transition: none;
+  }
+}
 .full-screen-logo {
   width: 10px;
   height: 10px;

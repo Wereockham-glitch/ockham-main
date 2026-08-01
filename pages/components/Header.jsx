@@ -1,33 +1,16 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { usePageTransition } from "./PageTransition";
 
 const Header = ({ setFullscreen }) => {
   const router = useRouter();
-  const [showOverlay, setShowOverlay] = useState(false);
+  const { handleLinkClick } = usePageTransition();
 
   const isAbout = router.pathname === "/about";
   const isDaily = router.pathname === "/daily";
 
-  const goToAbout = () => {
-    console.log("ABOUT CLICK");
-    setShowOverlay(true);
-
-    setTimeout(() => {
-      console.log("GO ABOUT");
-      window.location.href = "/about";
-    }, 1500);
-  };
-
   return (
     <>
-      {/* Global transition overlay */}
-      <div
-        className={`fixed inset-0 z-[99999] pointer-events-none backdrop-blur-xl transition-all duration-[1500ms] ${
-          showOverlay ? "opacity-100 bg-white" : "opacity-0 bg-white"
-        }`}
-      />
-
       <header
         className={`flex justify-between fixed z-[70] top-0 w-full py-4 md:px-6 mix-blend-difference bg-black text-white pointer-events-none ${
           isAbout ? "px-6" : "px-3"
@@ -35,13 +18,17 @@ const Header = ({ setFullscreen }) => {
       >
         {/* Left side */}
         <div
-  className={`pointer-events-auto text-[13px] md:text-[17px] ${
+  className={`pointer-events-auto text-[13px] md:text-[15px] md:leading-[1.2] ${
     isAbout ? "pointer-events-none opacity-0" : ""
   }`}
   onClick={() => setFullscreen?.(false)}
 >
   {!isAbout && (
-    <Link href="/" className="cursor-pointer">
+    <Link
+      href="/"
+      className="cursor-pointer"
+      onClick={(event) => handleLinkClick(event, "/")}
+    >
       We’re <span className="font-bold">OCKHAM</span>, a directing duo
     </Link>
   )}
@@ -56,18 +43,23 @@ const Header = ({ setFullscreen }) => {
                 about
               </Link>
             ) : (
-              <button
-                onClick={goToAbout}
+              <Link
+                href="/about"
+                onClick={(event) => handleLinkClick(event, "/about")}
                 className="mx-5 cursor-pointer"
               >
                 about
-              </button>
+              </Link>
             )}
           </div>
 
           {/* DAILY */}
           <div onClick={() => setFullscreen?.(false)}>
-            <Link className={isDaily ? "font-bold" : ""} href="/daily">
+            <Link
+              className={isDaily ? "font-bold" : ""}
+              href="/daily"
+              onClick={(event) => handleLinkClick(event, "/daily")}
+            >
               daily
             </Link>
           </div>

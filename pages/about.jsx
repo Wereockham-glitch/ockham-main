@@ -1,20 +1,13 @@
-import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { NextSeo } from "next-seo";
 import AboutImage from "../public/img/about.jpg";
 import { getApolloClient } from "@/lib/apollo";
 import { gql } from "@apollo/client";
+import { usePageTransition } from "./components/PageTransition";
 
 export default function About({ page = undefined }) {
-  const [showOverlay, setShowOverlay] = useState(false);
-
-  const goHome = () => {
-    setShowOverlay(true);
-
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 1500);
-  };
+  const { handleLinkClick } = usePageTransition();
 
   return (
     <>
@@ -41,19 +34,13 @@ export default function About({ page = undefined }) {
     siteName: "OCKHAM",
   }}
 />
-      {/* White transition overlay */}
-      <div
-        className={`fixed inset-0 z-[99999] pointer-events-none backdrop-blur-md transition-all duration-[1500ms] ${
-          showOverlay ? "opacity-100 bg-white/70" : "opacity-0 bg-white/0"
-        }`}
-      />
-
       <div className="bg-white min-h-screen px-6 md:px-8 pt-[21px] md:pt-4 pb-8 flex flex-col">
         {/* Texto */}
        {/* Texto */}
-<div className="max-w-[205px] md:max-w-[640px] font-condensed text-[17px] leading-[1.35] md:leading-[1.2] tracking-[-0.035em]">
-  <div
-    onClick={goHome}
+<div className="max-w-[205px] md:max-w-[640px] font-condensed text-[17px] leading-[1.35] md:text-[15px] md:leading-[1.25] tracking-[-0.035em]">
+  <Link
+    href="/"
+    onClick={(event) => handleLinkClick(event, "/")}
     className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
   >
     <div className="space-y-1">
@@ -84,7 +71,7 @@ export default function About({ page = undefined }) {
         worlds through direction, production design and creative development.
       </p>
     </div>
-  </div>
+  </Link>
 </div>
 
         {/* Imagen */}

@@ -2,7 +2,6 @@
     import { gql } from "@apollo/client";
     import { getApolloClient } from "@/lib/apollo";
     import { use100vh } from "react-div-100vh";
-    import "animate.css";
     import dynamic from "next/dynamic";
     import { NextSeo } from "next-seo";
     import Head from "next/head";
@@ -104,7 +103,7 @@
       }}
     />
 
-          <div className="animate__animated animate__fadeIn  bg-white">
+          <div className="bg-white">
             <Cabecera
               fullscreen={fullscreen}
               setFullscreen={setFullscreen}
