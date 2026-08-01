@@ -42,26 +42,33 @@ const Proyectos = ({
 
   const elsRef = useRef([]);
 
-  const handleIntersect = useCallback((entries) => {
-    const [entry] = entries;
-    const videos = entry.target.querySelectorAll("video");
-    videos.forEach((video) => {
-      const videoUrl = video.getAttribute("data-src");
-      // const dataSrc = activeVideo.getAttribute("data-src")
-      if (!video.getAttribute("src")) {
-        video.setAttribute("src", videoUrl);
-      }
-      // if (entry.isIntersecting) {
-      //   video.play();
-      // } else {
-      //   video.pause();
-      // }
-    });
+  const handleIntersect = useCallback(
+    (entries) => {
+      entries.forEach((entry) => {
+        const videos = entry.target.querySelectorAll("video");
+        entry.target.dataset.active = entry.isIntersecting ? "true" : "false";
 
-    if (entry.isIntersecting) {
-      setActiveThumb(entry.target.id);
-    }
-  }, [setActiveThumb]);
+        videos.forEach((video) => {
+          if (entry.isIntersecting) {
+            const videoUrl = video.getAttribute("data-src");
+
+            if (videoUrl && !video.getAttribute("src")) {
+              video.setAttribute("src", videoUrl);
+            }
+
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+
+        if (entry.isIntersecting) {
+          setActiveThumb(entry.target.id);
+        }
+      });
+    },
+    [setActiveThumb]
+  );
 
   const createObserver = (elsRef, observer) => {
      if (elsRef.current && observer)
@@ -73,17 +80,20 @@ const Proyectos = ({
   };
 
   useEffect(() => {
-    const options = { threshold: 0.2 };
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    const options = { threshold: isDesktop ? 0.55 : 0.2 };
     const observer = new IntersectionObserver(handleIntersect, options);
     if (elsRef.current && observer) {
       createObserver(elsRef, observer);
     }
+
+    return () => observer.disconnect();
   }, [handleIntersect]);
 
   elsRef.current = [];
 
   return (
-  <div className="mt-4 pb-[10vh]">
+  <div className="home-project-list mt-4 pb-[10vh]">
     {proyectos?.map((p, i) => {
       const { contenidoProyecto } = p;
       const { sliderYCrDitos } = contenidoProyecto;
@@ -100,7 +110,7 @@ const Proyectos = ({
 
       return (
         <div
-          className={`${
+          className={`home-project ${
             fullscreen ? "opacity-0" : "opacity-100"
           } transition-opacity ${
             i === proyectos.length - 1 ? "mt-[4vh]" : ""

@@ -11,7 +11,7 @@ const InfinitePortfolio = ({
 }) => {
   return (
   <>
-    <div data-infinite-cycle>
+    <div className="home-portfolio-cycle" data-infinite-cycle>
       <Proyectos
         listadoProyectos={listadoProyectos}
         fullscreen={fullscreen}
@@ -22,7 +22,7 @@ const InfinitePortfolio = ({
       />
     </div>
 
-    <div data-infinite-cycle>
+    <div className="home-portfolio-cycle" data-infinite-cycle>
            <Proyectos
         listadoProyectos={listadoProyectos}
         fullscreen={fullscreen}

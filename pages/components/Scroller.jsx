@@ -42,7 +42,10 @@ const Scroller = ({ height, fullscreen, setFullscreen, children }) => {
         <div {...props} className="thumb-vertical bg-yellow-400 z-50" />
       )}
       renderView={(props) => (
-        <div {...props} className="overflow-x-hidden-important bg-white" />
+        <div
+          {...props}
+          className="home-scroll-viewport overflow-x-hidden-important bg-white"
+        />
       )}
       style={{ height: height }}
     >

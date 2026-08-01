@@ -15,7 +15,7 @@ const Mosaico = ({
 
   return (
     <>
-      <div className="hidden md:grid grid-cols-12 gap-y-20 gap-x-4 px-4 py-32">
+      <div className="home-project-collage hidden md:grid grid-cols-12 gap-y-20 gap-x-4 px-4 py-32">
         {mosaico?.map((m, i) => {
           const { index } = m;
           const { size } = m;
@@ -107,6 +107,7 @@ const Mosaico = ({
               }}
               key={i}
               className={
+                "home-project-collage-item" +
                 `${imageStart}` +
                 `${imageSize}` +
                 ` overflow-hidden flex items-start flex-col justify-center relative`
@@ -117,7 +118,7 @@ const Mosaico = ({
               </div>
 
               <div
-                className={`relative ${isSquare ? "w-[65%]" : "w-full"} ${
+                className={`home-project-collage-media relative ${isSquare ? "w-[65%]" : "w-full"} ${
                   isWiZLight ? "scale-[0.88] origin-top-left" : ""
                 }`}
               >
