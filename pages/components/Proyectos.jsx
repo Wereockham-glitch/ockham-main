@@ -114,40 +114,50 @@ const MobileProject = ({
       data-thumb-id={thumbId}
       ref={projectRef}
     >
-      {mosaico && (
-        <Mosaico
-          variant="mobileEditorial"
-          fullscreen={fullscreen}
-          setFullscreen={setFullscreen}
-          setFullscreenUrl={setFullscreenUrl}
-          imagePriority={imagePriority}
-          mosaico={mosaico}
-          videoOrigen={videoOrigen}
-          isWiZLight={isWiZLight}
-        />
-      )}
+      <section
+        className="home-mobile-scene home-mobile-mosaic-scene"
+        data-mobile-scene="mosaic"
+      >
+        {mosaico && (
+          <Mosaico
+            variant="mobileEditorial"
+            fullscreen={fullscreen}
+            setFullscreen={setFullscreen}
+            setFullscreenUrl={setFullscreenUrl}
+            imagePriority={imagePriority}
+            mosaico={mosaico}
+            videoOrigen={videoOrigen}
+            isWiZLight={isWiZLight}
+          />
+        )}
+      </section>
 
-      {slider && (
-        <Slider
-          variant="mobileEditorial"
-          fullscreen={fullscreen}
-          setFullscreen={setFullscreen}
-          setFullscreenUrl={setFullscreenUrl}
-          slider={slider}
-          imagePriority={imagePriority}
-        />
-      )}
+      <section
+        className="home-mobile-scene home-mobile-video-scene"
+        data-mobile-scene="video"
+      >
+        {slider && (
+          <Slider
+            variant="mobileEditorial"
+            fullscreen={fullscreen}
+            setFullscreen={setFullscreen}
+            setFullscreenUrl={setFullscreenUrl}
+            slider={slider}
+            imagePriority={imagePriority}
+          />
+        )}
 
-      {collage && (
-        <Collage imagePriority={imagePriority} collage={collage} />
-      )}
+        {collage && (
+          <Collage imagePriority={imagePriority} collage={collage} />
+        )}
 
-      {credits && (
-        <div
-          className="home-mobile-project-credits font-sans text-[5px] leading-tight text-center mb-8 w-[68%] mx-auto"
-          dangerouslySetInnerHTML={{ __html: credits }}
-        />
-      )}
+        {credits && (
+          <div
+            className="home-mobile-project-credits font-sans text-[5px] leading-tight text-center mb-8 w-[68%] mx-auto"
+            dangerouslySetInnerHTML={{ __html: credits }}
+          />
+        )}
+      </section>
     </article>
   );
 };
@@ -294,6 +304,96 @@ const Proyectos = ({
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
     };
   }, [variant]);
+
+  useEffect(() => {
+    if (variant !== "mobileEditorial") return;
+
+    const scrollRoot = projectRefs.current[0]?.closest(
+      ".home-scroll-viewport"
+    );
+    const mobileScenes = projectRefs.current.flatMap((project) =>
+      project ? Array.from(project.querySelectorAll(".home-mobile-scene")) : []
+    );
+
+    if (!scrollRoot || mobileScenes.length === 0) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+    let animationFrame;
+
+    const setScenesVisible = () => {
+      mobileScenes.forEach((scene) => {
+        scene.style.setProperty("--mobile-scene-opacity", "1");
+      });
+    };
+
+    const updateMobileSceneProgress = () => {
+      if (reducedMotion.matches || fullscreen) {
+        setScenesVisible();
+        animationFrame = undefined;
+        return;
+      }
+
+      const viewportRect = scrollRoot.getBoundingClientRect();
+      const viewportHeight = scrollRoot.clientHeight;
+      const revealDistance = Math.max(viewportHeight * 0.35, 1);
+
+      const sceneProgress = mobileScenes.map((scene) => {
+        const sceneRect = scene.getBoundingClientRect();
+        const sceneTop = sceneRect.top - viewportRect.top;
+        const sceneBottom = sceneRect.bottom - viewportRect.top;
+        const enterProgress = Math.min(
+          Math.max((viewportHeight - sceneTop) / revealDistance, 0),
+          1
+        );
+        const exitProgress = Math.min(
+          Math.max(sceneBottom / revealDistance, 0),
+          1
+        );
+        const progress = Math.min(enterProgress, exitProgress);
+        const easedProgress = progress * progress * (3 - 2 * progress);
+
+        return 0.55 + easedProgress * 0.45;
+      });
+
+      mobileScenes.forEach((scene, index) => {
+        scene.style.setProperty(
+          "--mobile-scene-opacity",
+          sceneProgress[index].toFixed(3)
+        );
+      });
+
+      animationFrame = undefined;
+    };
+
+    const handleMobileVisualScroll = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateMobileSceneProgress);
+    };
+
+    const handleReducedMotionChange = () => {
+      if (reducedMotion.matches) {
+        setScenesVisible();
+      } else {
+        handleMobileVisualScroll();
+      }
+    };
+
+    updateMobileSceneProgress();
+    scrollRoot.addEventListener("scroll", handleMobileVisualScroll, {
+      passive: true,
+    });
+    window.addEventListener("resize", handleMobileVisualScroll);
+    reducedMotion.addEventListener("change", handleReducedMotionChange);
+
+    return () => {
+      scrollRoot.removeEventListener("scroll", handleMobileVisualScroll);
+      window.removeEventListener("resize", handleMobileVisualScroll);
+      reducedMotion.removeEventListener("change", handleReducedMotionChange);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, [fullscreen, variant]);
 
   projectRefs.current = [];
   sceneRefs.current = [];

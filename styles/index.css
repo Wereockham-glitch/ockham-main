@@ -88,6 +88,10 @@
     overflow: visible;
   }
 
+  .home-mobile-scene {
+    opacity: var(--mobile-scene-opacity, 1);
+  }
+
   .home-mobile-project-mosaic,
   .home-mobile-project-media,
   .home-mobile-project-credits {
@@ -165,6 +169,12 @@
     margin-bottom: clamp(3rem, 14vw, 4.5rem);
     font-size: 8px;
     line-height: 1.25;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-mobile-scene {
+      opacity: 1;
+    }
   }
 }
 
