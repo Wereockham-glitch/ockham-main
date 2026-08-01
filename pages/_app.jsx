@@ -1,5 +1,6 @@
 import "@/styles/index.css";
 import "@/styles/index.scss";
+import Head from "next/head";
 import Header from "./components/Header";
 import localFont from "@next/font/local";
 const normalFont = localFont({
@@ -28,6 +29,14 @@ export default function App({ Component, pageProps }) {
   const [fullscreenUrl, setFullscreenUrl] = useState();
   return (
     <PageTransition>
+      <Head>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-ockham.png"
+        />
+      </Head>
       <div
         className={`${conFont.variable} ${normalFont.variable} ${normalBoldFont.variable}`}
       >
