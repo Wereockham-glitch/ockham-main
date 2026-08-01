@@ -33,6 +33,7 @@ const InfinitePortfolio = ({
           setFullscreenUrl={setFullscreenUrl}
           setActiveThumb={setActiveThumb}
           setThumbs={setThumbs}
+          mobileLoopBridge
         />
       </div>
     );

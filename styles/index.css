@@ -101,12 +101,14 @@
   .home-mobile-project-mosaic {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: 0.25rem;
-    row-gap: clamp(3rem, 14vw, 4.5rem);
+    row-gap: clamp(5rem, 25vw, 6.25rem);
     align-items: start;
   }
 
   .home-mobile-project-mosaic-item {
     min-width: 0;
+    width: 100%;
+    max-width: 3.25rem;
   }
 
   .home-mobile-project-mosaic-media,
@@ -126,18 +128,18 @@
   }
 
   .home-mobile-project-media--horizontal {
-    width: calc(100% - 2rem);
-    max-width: 30rem;
+    width: 72vw;
+    max-width: 18rem;
   }
 
   .home-mobile-project-media--square {
-    width: 78vw;
-    max-width: 19rem;
+    width: 72vw;
+    max-width: 18rem;
   }
 
   .home-mobile-project-media--vertical {
-    width: 68vw;
-    max-width: 17rem;
+    width: 60vw;
+    max-width: 15rem;
   }
 
   .home-mobile-project-media .swiper-slide > div {
@@ -163,10 +165,10 @@
   }
 
   .home-mobile-project-credits {
-    width: calc(100% - 2rem);
-    max-width: 22rem;
+    width: 72vw;
+    max-width: 18rem;
     margin-top: 0.625rem;
-    margin-bottom: clamp(3rem, 14vw, 4.5rem);
+    margin-bottom: 1.5rem;
     font-size: 8px;
     line-height: 1.25;
   }

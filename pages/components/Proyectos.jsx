@@ -95,6 +95,7 @@ const MobileProject = ({
   setFullscreenUrl,
   imagePriority,
   projectRef,
+  dataCycle,
 }) => {
   const { contenidoProyecto } = project;
   const slider = contenidoProyecto?.sliderYCrDitos;
@@ -110,6 +111,7 @@ const MobileProject = ({
       className={`home-mobile-project ${
         fullscreen ? "opacity-0" : "opacity-100"
       } transition-opacity`}
+      data-cycle={dataCycle}
       data-project-id={project.id}
       data-thumb-id={thumbId}
       ref={projectRef}
@@ -171,6 +173,7 @@ const Proyectos = ({
   setThumbs,
   cycle,
   variant = "desktop",
+  mobileLoopBridge = false,
 }) => {
   const proyectos = listadoProyectos?.proyectos;
 
@@ -202,9 +205,63 @@ const Proyectos = ({
 
   const projectRefs = useRef([]);
   const sceneRefs = useRef([]);
+  const mobileListRef = useRef(null);
+  const mobileBridgeRef = useRef(null);
+  const mobileLoopSpacerRef = useRef(null);
+  const mobileCycleHeightRef = useRef(0);
+  const mobileLoopJumpingRef = useRef(false);
 
   const handleIntersect = useCallback(
     (entries) => {
+      if (variant === "mobileEditorial") {
+        entries.forEach((entry) => {
+          entry.target.dataset.intersectionRatio = entry.isIntersecting
+            ? entry.intersectionRatio.toString()
+            : "0";
+
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll("video").forEach((video) => {
+              const videoUrl = video.getAttribute("data-src");
+
+              if (videoUrl && !video.getAttribute("src")) {
+                video.setAttribute("src", videoUrl);
+              }
+            });
+          }
+        });
+
+        const activeProject = projectRefs.current.reduce((current, project) => {
+          if (!project) return current;
+
+          const projectRatio = Number(project.dataset.intersectionRatio || 0);
+          const currentRatio = Number(
+            current?.dataset.intersectionRatio || 0
+          );
+
+          return projectRatio > currentRatio ? project : current;
+        }, null);
+
+        projectRefs.current.forEach((project) => {
+          if (!project) return;
+
+          const isActive = project === activeProject;
+          project.dataset.active = isActive ? "true" : "false";
+          project.querySelectorAll("video").forEach((video) => {
+            if (isActive) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        });
+
+        if (activeProject) {
+          setActiveThumb(activeProject.dataset.thumbId);
+        }
+
+        return;
+      }
+
       entries.forEach((entry) => {
         const videos = entry.target.querySelectorAll("video");
         entry.target.dataset.active = entry.isIntersecting ? "true" : "false";
@@ -228,7 +285,7 @@ const Proyectos = ({
         }
       });
     },
-    [setActiveThumb]
+    [setActiveThumb, variant]
   );
 
   const createObserver = (elementsRef, observer) => {
@@ -242,7 +299,9 @@ const Proyectos = ({
 
   useEffect(() => {
     const isDesktop = variant === "desktop";
-    const options = { threshold: isDesktop ? 0.55 : 0.2 };
+    const options = {
+      threshold: isDesktop ? 0.55 : [0, 0.25, 0.5, 0.75, 1],
+    };
     const observer = new IntersectionObserver(handleIntersect, options);
     const elementsRef = isDesktop ? sceneRefs : projectRefs;
     if (elementsRef.current && observer) {
@@ -395,11 +454,74 @@ const Proyectos = ({
     };
   }, [fullscreen, variant]);
 
+  useEffect(() => {
+    if (variant !== "mobileEditorial" || !mobileLoopBridge) return;
+
+    const firstProject = projectRefs.current[0];
+    const bridgeProject = mobileBridgeRef.current;
+    const list = mobileListRef.current;
+    const spacer = mobileLoopSpacerRef.current;
+    const scrollRoot = firstProject?.closest(".home-scroll-viewport");
+
+    if (!firstProject || !bridgeProject || !list || !spacer || !scrollRoot) {
+      return;
+    }
+
+    const measureMobileCycle = () => {
+      const firstRect = firstProject.getBoundingClientRect();
+      const bridgeRect = bridgeProject.getBoundingClientRect();
+      mobileCycleHeightRef.current = bridgeRect.top - firstRect.top;
+
+      const spacerHeight = `${scrollRoot.clientHeight}px`;
+      if (spacer.style.height !== spacerHeight) {
+        spacer.style.height = spacerHeight;
+      }
+    };
+
+    const handleMobileLoop = () => {
+      if (mobileLoopJumpingRef.current) return;
+
+      const cycleHeight = mobileCycleHeightRef.current;
+      const viewportTop = scrollRoot.getBoundingClientRect().top;
+      const bridgeTop = bridgeProject.getBoundingClientRect().top - viewportTop;
+
+      if (cycleHeight > 0 && bridgeTop <= 0) {
+        mobileLoopJumpingRef.current = true;
+        bridgeProject.querySelectorAll("video").forEach((video) => {
+          video.pause();
+        });
+        scrollRoot.scrollTop -= cycleHeight;
+
+        window.requestAnimationFrame(() => {
+          mobileLoopJumpingRef.current = false;
+        });
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(measureMobileCycle);
+    resizeObserver.observe(list);
+    resizeObserver.observe(firstProject);
+    resizeObserver.observe(bridgeProject);
+
+    measureMobileCycle();
+    scrollRoot.addEventListener("scroll", handleMobileLoop, { passive: true });
+    window.addEventListener("resize", measureMobileCycle);
+
+    return () => {
+      scrollRoot.removeEventListener("scroll", handleMobileLoop);
+      window.removeEventListener("resize", measureMobileCycle);
+      resizeObserver.disconnect();
+    };
+  }, [mobileLoopBridge, variant]);
+
   projectRefs.current = [];
   sceneRefs.current = [];
 
   return (
-  <div className="home-project-list mt-4 pb-[10vh]">
+  <div
+    className="home-project-list mt-4 pb-[10vh]"
+    ref={mobileListRef}
+  >
     {proyectos?.map((p, i) => {
       const imagePriority =
         variant === "mobileEditorial" ? i === 0 : i <= 30;
@@ -444,6 +566,27 @@ const Proyectos = ({
         />
         );
       })}
+
+    {variant === "mobileEditorial" && mobileLoopBridge && proyectos?.[0] && (
+      <MobileProject
+        key={`mobile-loop-bridge-${proyectos[0].id}`}
+        project={proyectos[0]}
+        index={0}
+        fullscreen={fullscreen}
+        setFullscreen={setFullscreen}
+        setFullscreenUrl={setFullscreenUrl}
+        imagePriority={false}
+        dataCycle="loop-bridge"
+        projectRef={(el) => {
+          projectRefs.current[proyectos.length] = el;
+          mobileBridgeRef.current = el;
+        }}
+      />
+    )}
+
+    {variant === "mobileEditorial" && mobileLoopBridge && (
+      <div ref={mobileLoopSpacerRef} aria-hidden="true" />
+    )}
 
     </div>
   );
