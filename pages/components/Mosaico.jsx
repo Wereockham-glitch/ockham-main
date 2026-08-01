@@ -1,5 +1,21 @@
 import Image from "next/image";
 
+const mobileColumnSpans = {
+  "2_col": 3,
+  "3_col": 4,
+  "4_col": 5,
+  "5_col": 6,
+  "6_col": 7,
+};
+
+const getMobileGridPlacement = (size, columnStart) => {
+  const span = mobileColumnSpans[size] || 6;
+  const requestedStart = Number(columnStart?.split("_")[0]) || 1;
+  const start = Math.min(requestedStart, 13 - span);
+
+  return { span, start };
+};
+
 const Mosaico = ({
   variant = "desktop",
   mosaico,
@@ -197,49 +213,27 @@ const Mosaico = ({
             mediaDetails?.height &&
             Math.abs(mediaDetails.width - mediaDetails.height) < 20;
 
-          const imageSize = {
-            "2_col": "col-span-2",
-            "3_col": "col-span-3",
-            "4_col": "col-span-4",
-            "5_col": "col-span-5",
-            "6_col": "col-span-6",
-          }[size];
-
-          const imageStart = {
-            "1_start": "col-start-1",
-            "2_start": "col-start-2",
-            "3_start": "col-start-3",
-            "4_start": "col-start-4",
-            "5_start": "col-start-5",
-            "6_start": "col-start-6",
-            "7_start": "col-start-7",
-            "8_start": "col-start-8",
-            "9_start": "col-start-9",
-            "10_start": "col-start-10",
-            "11_start": "col-start-11",
-            "12_start": "col-start-12",
-          }[columnStart];
+          const { span, start } = getMobileGridPlacement(size, columnStart);
 
           return (
             <div
               key={i}
               style={{
+                gridColumn: `${start} / span ${span}`,
                 transform: `translate(${xPosition ? xPosition : 0}%, ${
                   yPosition ? yPosition : 0
                 }%)`,
               }}
-              className={`${imageStart || ""} ${
-                imageSize || "col-span-12"
-              } overflow-hidden flex items-start flex-col justify-center relative`}
+              className="home-mobile-project-mosaic-item overflow-hidden flex items-start flex-col justify-center relative"
             >
-              <div className="font-condensed text-[5px] tracking-[-0.02em] mb-0.5 select-none">
+              <div className="font-condensed text-[6px] tracking-[-0.02em] mb-0.5 select-none">
                 {index}
               </div>
 
               <div
-                className={`relative ${isSquare ? "w-[65%]" : "w-full"} ${
-                  isWiZLight ? "scale-[0.88] origin-top-left" : ""
-                }`}
+                className="home-mobile-project-mosaic-media relative w-full"
+                data-square={isSquare ? "true" : undefined}
+                data-wiz-light={isWiZLight ? "true" : undefined}
               >
                 {base64field ? (
                   <Image

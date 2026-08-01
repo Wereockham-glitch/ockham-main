@@ -12,6 +12,19 @@ import "swiper/css/effect-fade";
 import { use100vh } from "react-div-100vh";
 import { useRef, useState } from "react";
 
+const getMobileMediaOrientation = (sliderData) => {
+  const mediaDetails = sliderData?.find(
+    (slide) => slide.image?.mediaDetails?.width && slide.image?.mediaDetails?.height
+  )?.image?.mediaDetails;
+
+  if (!mediaDetails) return "horizontal";
+
+  const ratio = mediaDetails.width / mediaDetails.height;
+  if (ratio < 0.85) return "vertical";
+  if (ratio <= 1.15) return "square";
+  return "horizontal";
+};
+
 const Slider = ({
   variant = "desktop",
   slider,
@@ -22,6 +35,7 @@ const Slider = ({
   const credits = slider?.credits;
   const zoom = slider?.zoom;
   const sliderData = slider?.slider;
+  const mobileMediaOrientation = getMobileMediaOrientation(sliderData);
   const height = use100vh();
   const cHeight = height ? height - 56 : "calc(100vh - 56px)";
 
@@ -46,9 +60,12 @@ const Slider = ({
             key={1 + "a"}
             className={`normal-swiper items-center justify-center flex flex-col mt-8 mb-2 md:my-8 ${
               variant === "mobileEditorial"
-                ? "home-mobile-project-media w-[68%]"
+                ? `home-mobile-project-media home-mobile-project-media--${mobileMediaOrientation}`
                 : "w-[68%] md:w-full"
             }`}
+            data-orientation={
+              variant === "mobileEditorial" ? mobileMediaOrientation : undefined
+            }
             spaceBetween={50}
             slidesPerView={1}
             autoplay={{
@@ -149,7 +166,7 @@ const Slider = ({
                             ? slide?.image?.altText
                             : "video"
                         }
-                        className="block md:hidden w-auto h-full z-40 object-cover absolute top-0 mx-auto"
+                        className="home-mobile-project-video block md:hidden w-auto h-full z-40 object-cover absolute top-0 mx-auto"
                       />
                     )}
                   </div>

@@ -93,6 +93,79 @@
   .home-mobile-project-credits {
     position: relative;
   }
+
+  .home-mobile-project-mosaic {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 0.25rem;
+    row-gap: clamp(3rem, 14vw, 4.5rem);
+    align-items: start;
+  }
+
+  .home-mobile-project-mosaic-item {
+    min-width: 0;
+  }
+
+  .home-mobile-project-mosaic-media,
+  .home-mobile-project-mosaic-media img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .home-mobile-project-mosaic-media img {
+    display: block;
+    height: auto;
+  }
+
+  .home-mobile-project-media {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-mobile-project-media--horizontal {
+    width: calc(100% - 2rem);
+    max-width: 30rem;
+  }
+
+  .home-mobile-project-media--square {
+    width: 78vw;
+    max-width: 19rem;
+  }
+
+  .home-mobile-project-media--vertical {
+    width: 68vw;
+    max-width: 17rem;
+  }
+
+  .home-mobile-project-media .swiper-slide > div {
+    width: 100%;
+  }
+
+  .home-mobile-project-media img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .home-mobile-project-media--vertical .swiper-slide > div,
+  .home-mobile-project-media--vertical img,
+  .home-mobile-project-media--vertical .home-mobile-project-video {
+    max-height: 68svh;
+  }
+
+  .home-mobile-project-media--vertical img,
+  .home-mobile-project-media--vertical .home-mobile-project-video {
+    object-fit: contain;
+  }
+
+  .home-mobile-project-credits {
+    width: calc(100% - 2rem);
+    max-width: 22rem;
+    margin-top: 0.625rem;
+    margin-bottom: clamp(3rem, 14vw, 4.5rem);
+    font-size: 8px;
+    line-height: 1.25;
+  }
 }
 
 /* Experimental desktop-only project paging for the Home portfolio. */
