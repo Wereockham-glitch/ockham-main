@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
         <link
           rel="icon"
           type="image/png"
-          sizes="32x32"
+          sizes="64x64"
           href="/favicon-ockham.png"
         />
       </Head>
