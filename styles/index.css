@@ -68,6 +68,10 @@
   overflow-x: hidden !important;
 }
 
+.home-project-scene {
+  display: contents;
+}
+
 /* Experimental desktop-only project paging for the Home portfolio. */
 @media (min-width: 768px) {
   .home-scroll-viewport {
@@ -82,32 +86,48 @@
   }
 
   .home-project {
+    display: contents;
+    margin-top: 0;
+  }
+
+  .home-project-scene {
     position: relative;
+    display: block;
     height: 100svh;
     min-height: 100svh;
-    margin-top: 0;
     overflow: hidden;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    opacity: 0.94;
-    transition: opacity 220ms ease-out;
+    opacity: var(--scene-progress-opacity, 0.45);
+    transform: translate3d(0, var(--scene-progress-y, 0px), 0);
+    transition:
+      opacity 50ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 50ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
   }
 
-  .home-project[data-active="true"] {
-    opacity: 1;
-  }
-
-  .home-project.opacity-0 {
+  .home-project-scene.opacity-0 {
     opacity: 0;
   }
 
-  .home-project-collage {
+  .home-mosaic-scene .home-project-collage {
     height: 100%;
     min-height: 0;
     padding-top: 5rem;
     padding-bottom: 2rem;
     row-gap: 1rem;
     grid-auto-rows: minmax(0, 1fr);
+  }
+
+  .home-video-scene {
+    display: flex;
+    align-items: center;
+  }
+
+  .home-video-scene > .group {
+    width: 100%;
+    max-height: 100%;
+    overflow: hidden;
   }
 
   .home-project-collage-item {
@@ -130,7 +150,9 @@
 }
 
 @media (min-width: 768px) and (prefers-reduced-motion: reduce) {
-  .home-project {
+  .home-project-scene {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 }

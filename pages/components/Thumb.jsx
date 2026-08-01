@@ -70,7 +70,7 @@ const Thumb = ({
       ></div>
 
       <motion.div
-        className="hidden md:block fixed bottom-4 right-8 w-full max-w-[256px] z-40 after:absolute after:w-[calc(100%+6rem)] cursor-move after:origin-center after:-translate-x-[3rem] after:h-full after:-z-10 after:top-0"
+        className="hidden md:block fixed bottom-4 right-8 w-full max-w-[256px] z-[80] pointer-events-auto isolate after:absolute after:w-[calc(100%+6rem)] cursor-move after:origin-center after:-translate-x-[3rem] after:h-full after:-z-10 after:top-0"
         drag
         dragElastic={1}
         // onPointerDownCapture={e => e.stopPropagation()}

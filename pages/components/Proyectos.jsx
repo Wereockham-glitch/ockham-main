@@ -11,6 +11,7 @@ const Proyectos = ({
   setFullscreenUrl,
   setActiveThumb,
   setThumbs,
+  cycle,
 }) => {
   const proyectos = listadoProyectos?.proyectos;
 
@@ -40,7 +41,8 @@ const Proyectos = ({
     }
   }, [proyectos, setThumbs]);
 
-  const elsRef = useRef([]);
+  const projectRefs = useRef([]);
+  const sceneRefs = useRef([]);
 
   const handleIntersect = useCallback(
     (entries) => {
@@ -63,16 +65,16 @@ const Proyectos = ({
         });
 
         if (entry.isIntersecting) {
-          setActiveThumb(entry.target.id);
+          setActiveThumb(entry.target.dataset.thumbId);
         }
       });
     },
     [setActiveThumb]
   );
 
-  const createObserver = (elsRef, observer) => {
-     if (elsRef.current && observer)
-      elsRef.current.forEach((el) => {
+  const createObserver = (elementsRef, observer) => {
+     if (elementsRef.current && observer)
+      elementsRef.current.forEach((el) => {
         if (el) {
           observer.observe(el);
         }
@@ -83,14 +85,69 @@ const Proyectos = ({
     const isDesktop = window.matchMedia("(min-width: 768px)").matches;
     const options = { threshold: isDesktop ? 0.55 : 0.2 };
     const observer = new IntersectionObserver(handleIntersect, options);
-    if (elsRef.current && observer) {
-      createObserver(elsRef, observer);
+    const elementsRef = isDesktop ? sceneRefs : projectRefs;
+    if (elementsRef.current && observer) {
+      createObserver(elementsRef, observer);
     }
 
     return () => observer.disconnect();
   }, [handleIntersect]);
 
-  elsRef.current = [];
+  useEffect(() => {
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    const scrollRoot = sceneRefs.current[0]?.closest(
+      ".home-scroll-viewport"
+    );
+
+    if (!isDesktop || !scrollRoot) return;
+
+    let animationFrame;
+
+    const updateSceneProgress = () => {
+      const viewportTop = scrollRoot.getBoundingClientRect().top;
+      const viewportHeight = scrollRoot.clientHeight;
+
+      sceneRefs.current.forEach((scene) => {
+        if (!scene) return;
+
+        const sceneTop = scene.getBoundingClientRect().top - viewportTop;
+        const distance = Math.min(Math.abs(sceneTop) / viewportHeight, 1);
+        const progress = 1 - distance;
+        const direction = sceneTop < 0 ? -1 : 1;
+        const opacity = 0.45 + progress * 0.55;
+        const translateY = direction * distance * 0;
+
+        scene.style.setProperty(
+            "--scene-progress-opacity",
+            opacity.toFixed(3)
+          );
+        scene.style.setProperty(
+            "--scene-progress-y",
+            `${translateY.toFixed(2)}px`
+          );
+      });
+
+      animationFrame = undefined;
+    };
+
+    const handleVisualScroll = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateSceneProgress);
+    };
+
+    updateSceneProgress();
+    scrollRoot.addEventListener("scroll", handleVisualScroll, {
+      passive: true,
+    });
+
+    return () => {
+      scrollRoot.removeEventListener("scroll", handleVisualScroll);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  projectRefs.current = [];
+  sceneRefs.current = [];
 
   return (
   <div className="home-project-list mt-4 pb-[10vh]">
@@ -102,6 +159,7 @@ const Proyectos = ({
       const { mosaico } = contenidoProyecto;
       const videoOrigen = contenidoProyecto?.videoOrigen;
       const isWiZLight = p.id === "cG9zdDo0ODE=";
+      const thumbId = `st-${i}`;
 
       let imagePriority = false;
       if (i <= 30) {
@@ -115,13 +173,26 @@ const Proyectos = ({
           } transition-opacity ${
             i === proyectos.length - 1 ? "mt-[4vh]" : ""
           }`}
-          id={`st-${i}`}
-          key={i}
+          data-cycle={cycle}
+          data-project-id={p.id}
+          data-thumb-id={thumbId}
+          key={p.id}
           ref={(el) => {
-  elsRef.current[i] = el;
-}}
+            projectRefs.current[i] = el;
+          }}
         >
-            {/* <div>{p.title}</div> */}
+          <div
+            className={`home-project-scene home-mosaic-scene ${
+              fullscreen ? "opacity-0" : "opacity-100"
+            }`}
+            data-cycle={cycle}
+            data-project-id={p.id}
+            data-scene="mosaic"
+            data-thumb-id={thumbId}
+            ref={(el) => {
+              sceneRefs.current[i * 2] = el;
+            }}
+          >
             {mosaico && (
               <Mosaico
                 fullscreen={fullscreen}
@@ -133,6 +204,20 @@ const Proyectos = ({
                 isWiZLight={isWiZLight}
               />
             )}
+          </div>
+
+          <div
+            className={`home-project-scene home-video-scene ${
+              fullscreen ? "opacity-0" : "opacity-100"
+            }`}
+            data-cycle={cycle}
+            data-project-id={p.id}
+            data-scene="video"
+            data-thumb-id={thumbId}
+            ref={(el) => {
+              sceneRefs.current[i * 2 + 1] = el;
+            }}
+          >
             {slider && (
               <Slider
                 fullscreen={fullscreen}
@@ -145,6 +230,7 @@ const Proyectos = ({
             {collage && (
               <Collage imagePriority={imagePriority} collage={collage} />
             )}
+          </div>
           </div>
         );
       })}
