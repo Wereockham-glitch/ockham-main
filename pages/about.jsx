@@ -48,18 +48,29 @@ export default function About({ page = undefined }) {
         }`}
       />
 
-      <div className="bg-white min-h-screen px-8 pt-4 pb-8 flex flex-col">
+      <div className="bg-white min-h-screen px-6 md:px-8 pt-[21px] md:pt-4 pb-8 flex flex-col">
         {/* Texto */}
        {/* Texto */}
-<div className="max-w-[640px] font-condensed text-[17px] leading-[1.2] tracking-[-0.035em]">
+<div className="max-w-[205px] md:max-w-[640px] font-condensed text-[17px] leading-[1.35] md:leading-[1.2] tracking-[-0.035em]">
   <div
     onClick={goHome}
     className="block cursor-pointer hover:opacity-60 transition-opacity duration-500"
   >
     <div className="space-y-1">
       <p>
-        We’re <strong>OCKHAM</strong>, a directing duo based in Madrid, by
-        Lucas Couto and Cora Patiño.
+        <span className="md:hidden">
+          <span className="block whitespace-nowrap">
+            We’re <strong>OCKHAM</strong>, a directing duo
+          </span>
+          <span className="block whitespace-nowrap">based between Madrid,</span>
+          <span className="block whitespace-nowrap">
+            by Lucas Couto and Cora Patiño.
+          </span>
+        </span>
+        <span className="hidden md:inline">
+          We’re <strong>OCKHAM</strong>, a directing duo based in Madrid, by
+          Lucas Couto and Cora Patiño.
+        </span>
       </p>
 
       <p>
@@ -77,7 +88,7 @@ export default function About({ page = undefined }) {
 </div>
 
         {/* Imagen */}
-        <div className="mt-8">
+        <div className="mt-8 w-[205px] md:w-auto">
           <Image
             src={AboutImage}
             alt="Lucas and Cora"
@@ -88,11 +99,11 @@ export default function About({ page = undefined }) {
 
         {/* Footer */}
         <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
-          <div className="text-[11px] md:text-[14px] tracking-[-0.02em]">
+          <div className="text-[14px] tracking-[-0.02em]">
             <a href="mailto:weareockham@gmail.com">mail</a>
           </div>
 
-          <div className="flex flex-col items-end gap-0.5 text-[11px] md:text-[14px] tracking-[-0.02em]">
+          <div className="flex flex-col items-end gap-0.5 text-[14px] tracking-[-0.02em]">
             <a
               href="https://vimeo.com/ockhamduo"
               target="_blank"

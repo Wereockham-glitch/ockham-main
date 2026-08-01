@@ -61,7 +61,7 @@ const Thumb = ({
     <>
       <div
         ref={constraintsRef}
-        className="pointer-events-none fixed 
+        className="hidden md:block pointer-events-none fixed
         top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] 
 
         md:top-4 md:left-4 md:w-[calc(100%-2rem)] md:h-[calc(100%-2rem)] 
@@ -70,7 +70,7 @@ const Thumb = ({
       ></div>
 
       <motion.div
-        className="fixed bottom-4 right-8 block w-full max-w-[160px] md:max-w-[256px]  z-40 after:absolute after:w-[calc(100%+6rem)] cursor-move after:origin-center after:-translate-x-[3rem] after:h-full after:-z-10  after:top-0"
+        className="hidden md:block fixed bottom-4 right-8 w-full max-w-[256px] z-40 after:absolute after:w-[calc(100%+6rem)] cursor-move after:origin-center after:-translate-x-[3rem] after:h-full after:-z-10 after:top-0"
         drag
         dragElastic={1}
         // onPointerDownCapture={e => e.stopPropagation()}

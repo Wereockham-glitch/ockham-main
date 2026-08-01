@@ -173,9 +173,13 @@ const Mosaico = ({
         })}
       </div>
 
-      <div className="grid md:hidden grid-cols-12 gap-y-20 gap-x-4 px-4 py-32">
+      <div className="grid md:hidden grid-cols-12 gap-y-20 gap-x-1 px-4 pt-16 pb-10">
         {mosaico?.map((m, i) => {
           const { index } = m;
+          const { size } = m;
+          const { columnStart } = m;
+          const { xPosition } = m;
+          const { yPosition } = m;
           const { image } = m;
           const sourceUrl = image?.sourceUrl;
           const base64field = image?.base64field;
@@ -183,16 +187,55 @@ const Mosaico = ({
           const altText = image?.image;
           const video = m?.video;
 
+          const isSquare =
+            mediaDetails?.width &&
+            mediaDetails?.height &&
+            Math.abs(mediaDetails.width - mediaDetails.height) < 20;
+
+          const imageSize = {
+            "2_col": "col-span-2",
+            "3_col": "col-span-3",
+            "4_col": "col-span-4",
+            "5_col": "col-span-5",
+            "6_col": "col-span-6",
+          }[size];
+
+          const imageStart = {
+            "1_start": "col-start-1",
+            "2_start": "col-start-2",
+            "3_start": "col-start-3",
+            "4_start": "col-start-4",
+            "5_start": "col-start-5",
+            "6_start": "col-start-6",
+            "7_start": "col-start-7",
+            "8_start": "col-start-8",
+            "9_start": "col-start-9",
+            "10_start": "col-start-10",
+            "11_start": "col-start-11",
+            "12_start": "col-start-12",
+          }[columnStart];
+
           return (
             <div
               key={i}
-              className="overflow-hidden col-span-12 flex items-start flex-col justify-center relative"
+              style={{
+                transform: `translate(${xPosition ? xPosition : 0}%, ${
+                  yPosition ? yPosition : 0
+                }%)`,
+              }}
+              className={`${imageStart || ""} ${
+                imageSize || "col-span-12"
+              } overflow-hidden flex items-start flex-col justify-center relative`}
             >
-              <div className="font-condensed text-[10px] tracking-[-0.02em] mb-1 select-none">
+              <div className="font-condensed text-[5px] tracking-[-0.02em] mb-0.5 select-none">
                 {index}
               </div>
 
-              <div className="w-full relative">
+              <div
+                className={`relative ${isSquare ? "w-[65%]" : "w-full"} ${
+                  isWiZLight ? "scale-[0.88] origin-top-left" : ""
+                }`}
+              >
                 {base64field ? (
                   <Image
                     alt={altText ? altText : image?.title}

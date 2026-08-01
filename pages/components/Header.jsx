@@ -28,7 +28,11 @@ const Header = ({ setFullscreen }) => {
         }`}
       />
 
-      <header className="flex justify-between fixed z-[70] top-0 w-full px-6 py-4 mix-blend-difference bg-black text-white pointer-events-none">
+      <header
+        className={`flex justify-between fixed z-[70] top-0 w-full py-4 md:px-6 mix-blend-difference bg-black text-white pointer-events-none ${
+          isAbout ? "px-6" : "px-3"
+        }`}
+      >
         {/* Left side */}
         <div
   className={`pointer-events-auto text-[13px] md:text-[17px] ${

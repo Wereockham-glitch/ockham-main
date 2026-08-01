@@ -38,7 +38,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
         <>
           <Swiper
             key={1 + "a"}
-            className="normal-swiper w-full items-center justify-center flex flex-col my-8"
+            className="normal-swiper w-[68%] md:w-full items-center justify-center flex flex-col mt-8 mb-2 md:my-8"
             spaceBetween={50}
             slidesPerView={1}
             autoplay={{
@@ -56,7 +56,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
               return (
                 <SwiperSlide
                   key={i}
-                  className="mb-8 items-center justify-center"
+                  className="mb-2 md:mb-8 items-center justify-center"
                   onClick={() => videoOrigen && handleClick(videoOrigen)}
                 >
                   <div
@@ -150,7 +150,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
 
           {credits && (
             <div
-              className="font-sans text-xs text-center mb-8"
+              className="font-sans text-[5px] leading-tight md:text-xs text-center mb-8 w-[68%] md:w-auto mx-auto"
               dangerouslySetInnerHTML={{ __html: credits }}
             />
           )}
