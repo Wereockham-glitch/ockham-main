@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const Mosaico = ({
+  variant = "desktop",
   mosaico,
   imagePriority,
   setFullscreen,
@@ -15,6 +16,7 @@ const Mosaico = ({
 
   return (
     <>
+      {variant === "desktop" && (
       <div className="home-project-collage hidden md:grid grid-cols-12 gap-y-20 gap-x-4 px-4 py-32">
         {mosaico?.map((m, i) => {
           const { index } = m;
@@ -173,8 +175,10 @@ const Mosaico = ({
           );
         })}
       </div>
+      )}
 
-      <div className="grid md:hidden grid-cols-12 gap-y-20 gap-x-1 px-4 pt-16 pb-10">
+      {variant === "mobileEditorial" && (
+      <div className="home-mobile-project-mosaic grid grid-cols-12 gap-y-20 gap-x-1 px-4 pt-16 pb-10">
         {mosaico?.map((m, i) => {
           const { index } = m;
           const { size } = m;
@@ -286,6 +290,7 @@ const Mosaico = ({
           );
         })}
       </div>
+      )}
     </>
   );
 };

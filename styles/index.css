@@ -72,6 +72,29 @@
   display: contents;
 }
 
+@media (max-width: 767px) {
+  .home-mobile-portfolio,
+  .home-mobile-portfolio .home-project-list {
+    margin: 0;
+    padding-bottom: 10vh;
+  }
+
+  .home-mobile-project {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .home-mobile-project-mosaic,
+  .home-mobile-project-media,
+  .home-mobile-project-credits {
+    position: relative;
+  }
+}
+
 /* Experimental desktop-only project paging for the Home portfolio. */
 @media (min-width: 768px) {
   .home-scroll-viewport {

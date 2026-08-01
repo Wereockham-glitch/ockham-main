@@ -4,6 +4,154 @@ import Slider from "./Slider";
 import Collage from "./SliderCollage";
 import { useRef, useEffect, useCallback } from "react";
 
+const DesktopProject = ({
+  project,
+  index,
+  projectCount,
+  cycle,
+  fullscreen,
+  setFullscreen,
+  setFullscreenUrl,
+  imagePriority,
+  projectRef,
+  mosaicSceneRef,
+  videoSceneRef,
+}) => {
+  const { contenidoProyecto } = project;
+  const slider = contenidoProyecto?.sliderYCrDitos;
+  const collage = contenidoProyecto?.collage;
+  const mosaico = contenidoProyecto?.mosaico;
+  const videoOrigen = contenidoProyecto?.videoOrigen;
+  const isWiZLight = project.id === "cG9zdDo0ODE=";
+  const thumbId = `st-${index}`;
+
+  return (
+    <div
+      className={`home-project ${
+        fullscreen ? "opacity-0" : "opacity-100"
+      } transition-opacity ${index === projectCount - 1 ? "mt-[4vh]" : ""}`}
+      data-cycle={cycle}
+      data-project-id={project.id}
+      data-thumb-id={thumbId}
+      ref={projectRef}
+    >
+      <div
+        className={`home-project-scene home-mosaic-scene ${
+          fullscreen ? "opacity-0" : "opacity-100"
+        }`}
+        data-cycle={cycle}
+        data-project-id={project.id}
+        data-scene="mosaic"
+        data-thumb-id={thumbId}
+        ref={mosaicSceneRef}
+      >
+        {mosaico && (
+          <Mosaico
+            variant="desktop"
+            fullscreen={fullscreen}
+            setFullscreen={setFullscreen}
+            setFullscreenUrl={setFullscreenUrl}
+            imagePriority={imagePriority}
+            mosaico={mosaico}
+            videoOrigen={videoOrigen}
+            isWiZLight={isWiZLight}
+          />
+        )}
+      </div>
+
+      <div
+        className={`home-project-scene home-video-scene ${
+          fullscreen ? "opacity-0" : "opacity-100"
+        }`}
+        data-cycle={cycle}
+        data-project-id={project.id}
+        data-scene="video"
+        data-thumb-id={thumbId}
+        ref={videoSceneRef}
+      >
+        {slider && (
+          <Slider
+            variant="desktop"
+            fullscreen={fullscreen}
+            setFullscreen={setFullscreen}
+            setFullscreenUrl={setFullscreenUrl}
+            slider={slider}
+            imagePriority={imagePriority}
+          />
+        )}
+        {collage && (
+          <Collage imagePriority={imagePriority} collage={collage} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+const MobileProject = ({
+  project,
+  index,
+  fullscreen,
+  setFullscreen,
+  setFullscreenUrl,
+  imagePriority,
+  projectRef,
+}) => {
+  const { contenidoProyecto } = project;
+  const slider = contenidoProyecto?.sliderYCrDitos;
+  const collage = contenidoProyecto?.collage;
+  const mosaico = contenidoProyecto?.mosaico;
+  const videoOrigen = contenidoProyecto?.videoOrigen;
+  const isWiZLight = project.id === "cG9zdDo0ODE=";
+  const thumbId = `st-${index}`;
+  const credits = slider?.credits || collage?.credits;
+
+  return (
+    <article
+      className={`home-mobile-project ${
+        fullscreen ? "opacity-0" : "opacity-100"
+      } transition-opacity`}
+      data-project-id={project.id}
+      data-thumb-id={thumbId}
+      ref={projectRef}
+    >
+      {mosaico && (
+        <Mosaico
+          variant="mobileEditorial"
+          fullscreen={fullscreen}
+          setFullscreen={setFullscreen}
+          setFullscreenUrl={setFullscreenUrl}
+          imagePriority={imagePriority}
+          mosaico={mosaico}
+          videoOrigen={videoOrigen}
+          isWiZLight={isWiZLight}
+        />
+      )}
+
+      {slider && (
+        <Slider
+          variant="mobileEditorial"
+          fullscreen={fullscreen}
+          setFullscreen={setFullscreen}
+          setFullscreenUrl={setFullscreenUrl}
+          slider={slider}
+          imagePriority={imagePriority}
+        />
+      )}
+
+      {collage && (
+        <Collage imagePriority={imagePriority} collage={collage} />
+      )}
+
+      {credits && (
+        <div
+          className="home-mobile-project-credits font-sans text-[5px] leading-tight text-center mb-8 w-[68%] mx-auto"
+          dangerouslySetInnerHTML={{ __html: credits }}
+        />
+      )}
+    </article>
+  );
+};
+
 const Proyectos = ({
   listadoProyectos,
   fullscreen,
@@ -12,6 +160,7 @@ const Proyectos = ({
   setActiveThumb,
   setThumbs,
   cycle,
+  variant = "desktop",
 }) => {
   const proyectos = listadoProyectos?.proyectos;
 
@@ -82,7 +231,7 @@ const Proyectos = ({
   };
 
   useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    const isDesktop = variant === "desktop";
     const options = { threshold: isDesktop ? 0.55 : 0.2 };
     const observer = new IntersectionObserver(handleIntersect, options);
     const elementsRef = isDesktop ? sceneRefs : projectRefs;
@@ -91,10 +240,10 @@ const Proyectos = ({
     }
 
     return () => observer.disconnect();
-  }, [handleIntersect]);
+  }, [handleIntersect, variant]);
 
   useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    const isDesktop = variant === "desktop";
     const scrollRoot = sceneRefs.current[0]?.closest(
       ".home-scroll-viewport"
     );
@@ -144,7 +293,7 @@ const Proyectos = ({
       scrollRoot.removeEventListener("scroll", handleVisualScroll);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [variant]);
 
   projectRefs.current = [];
   sceneRefs.current = [];
@@ -152,86 +301,46 @@ const Proyectos = ({
   return (
   <div className="home-project-list mt-4 pb-[10vh]">
     {proyectos?.map((p, i) => {
-      const { contenidoProyecto } = p;
-      const { sliderYCrDitos } = contenidoProyecto;
-      const { collage } = contenidoProyecto;
-      const slider = sliderYCrDitos;
-      const { mosaico } = contenidoProyecto;
-      const videoOrigen = contenidoProyecto?.videoOrigen;
-      const isWiZLight = p.id === "cG9zdDo0ODE=";
-      const thumbId = `st-${i}`;
+      const imagePriority = i <= 30;
 
-      let imagePriority = false;
-      if (i <= 30) {
-        imagePriority = true;
+      if (variant === "mobileEditorial") {
+        return (
+          <MobileProject
+            key={p.id}
+            project={p}
+            index={i}
+            fullscreen={fullscreen}
+            setFullscreen={setFullscreen}
+            setFullscreenUrl={setFullscreenUrl}
+            imagePriority={imagePriority}
+            projectRef={(el) => {
+              projectRefs.current[i] = el;
+            }}
+          />
+        );
       }
 
       return (
-        <div
-          className={`home-project ${
-            fullscreen ? "opacity-0" : "opacity-100"
-          } transition-opacity ${
-            i === proyectos.length - 1 ? "mt-[4vh]" : ""
-          }`}
-          data-cycle={cycle}
-          data-project-id={p.id}
-          data-thumb-id={thumbId}
+        <DesktopProject
           key={p.id}
-          ref={(el) => {
+          project={p}
+          index={i}
+          projectCount={proyectos.length}
+          cycle={cycle}
+          fullscreen={fullscreen}
+          setFullscreen={setFullscreen}
+          setFullscreenUrl={setFullscreenUrl}
+          imagePriority={imagePriority}
+          projectRef={(el) => {
             projectRefs.current[i] = el;
           }}
-        >
-          <div
-            className={`home-project-scene home-mosaic-scene ${
-              fullscreen ? "opacity-0" : "opacity-100"
-            }`}
-            data-cycle={cycle}
-            data-project-id={p.id}
-            data-scene="mosaic"
-            data-thumb-id={thumbId}
-            ref={(el) => {
-              sceneRefs.current[i * 2] = el;
-            }}
-          >
-            {mosaico && (
-              <Mosaico
-                fullscreen={fullscreen}
-                setFullscreen={setFullscreen}
-                setFullscreenUrl={setFullscreenUrl}
-                imagePriority={imagePriority}
-                mosaico={mosaico}
-                videoOrigen={videoOrigen}
-                isWiZLight={isWiZLight}
-              />
-            )}
-          </div>
-
-          <div
-            className={`home-project-scene home-video-scene ${
-              fullscreen ? "opacity-0" : "opacity-100"
-            }`}
-            data-cycle={cycle}
-            data-project-id={p.id}
-            data-scene="video"
-            data-thumb-id={thumbId}
-            ref={(el) => {
-              sceneRefs.current[i * 2 + 1] = el;
-            }}
-          >
-            {slider && (
-              <Slider
-                fullscreen={fullscreen}
-                setFullscreen={setFullscreen}
-                setFullscreenUrl={setFullscreenUrl}
-                slider={slider}
-                imagePriority={imagePriority}
-              />
-            )}
-            {collage && (
-              <Collage imagePriority={imagePriority} collage={collage} />
-            )}
-          </div>
-          </div>
+          mosaicSceneRef={(el) => {
+            sceneRefs.current[i * 2] = el;
+          }}
+          videoSceneRef={(el) => {
+            sceneRefs.current[i * 2 + 1] = el;
+          }}
+        />
         );
       })}
 

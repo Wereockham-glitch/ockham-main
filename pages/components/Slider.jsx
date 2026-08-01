@@ -12,7 +12,13 @@ import "swiper/css/effect-fade";
 import { use100vh } from "react-div-100vh";
 import { useRef, useState } from "react";
 
-const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
+const Slider = ({
+  variant = "desktop",
+  slider,
+  imagePriority,
+  setFullscreen,
+  setFullscreenUrl,
+}) => {
   const credits = slider?.credits;
   const zoom = slider?.zoom;
   const sliderData = slider?.slider;
@@ -38,7 +44,11 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
         <>
           <Swiper
             key={1 + "a"}
-            className="normal-swiper w-[68%] md:w-full items-center justify-center flex flex-col mt-8 mb-2 md:my-8"
+            className={`normal-swiper items-center justify-center flex flex-col mt-8 mb-2 md:my-8 ${
+              variant === "mobileEditorial"
+                ? "home-mobile-project-media w-[68%]"
+                : "w-[68%] md:w-full"
+            }`}
             spaceBetween={50}
             slidesPerView={1}
             autoplay={{
@@ -103,7 +113,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
                       />
                     )}
 
-                    {slide.videoDesktop && (
+                    {variant === "desktop" && slide.videoDesktop && (
                       <video
                         loop
                         autoPlay
@@ -124,7 +134,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
                       />
                     )}
 
-                    {slide.videoMobile && (
+                    {variant === "mobileEditorial" && slide.videoMobile && (
                       <video
                         loop
                         autoPlay
@@ -148,7 +158,7 @@ const Slider = ({ slider, imagePriority, setFullscreen, setFullscreenUrl }) => {
             })}
           </Swiper>
 
-          {credits && (
+          {variant === "desktop" && credits && (
             <div
               className="font-sans text-[5px] leading-tight md:text-xs text-center mb-8 w-[68%] md:w-auto mx-auto"
               dangerouslySetInnerHTML={{ __html: credits }}
