@@ -11,13 +11,11 @@ const Scroller = ({ height, fullscreen, setFullscreen, children }) => {
     const view = event.target;
     const cycles = view.querySelectorAll("[data-infinite-cycle]");
     const [firstCycle, secondCycle] = cycles;
-    const threshold = 20;
 
     if (!firstCycle || !secondCycle) return;
 
     const cycleHeight = firstCycle.offsetHeight;
-    const secondCycleBottom = secondCycle.offsetTop + secondCycle.offsetHeight;
-    const loopStart = secondCycleBottom - view.clientHeight - threshold;
+    const loopStart = view.scrollTop + secondCycle.getBoundingClientRect().top - view.getBoundingClientRect().top;
 
     if (cycleHeight > 0 && loopStart > 0 && view.scrollTop >= loopStart) {
       isJumping.current = true;
@@ -44,7 +42,7 @@ const Scroller = ({ height, fullscreen, setFullscreen, children }) => {
       renderView={(props) => (
         <div
           {...props}
-          className="home-scroll-viewport overflow-x-hidden-important bg-white"
+          className={`home-scroll-viewport overflow-x-hidden-important bg-white ${fullscreen ? "is-player-open" : ""}`}
         />
       )}
       style={{ height: height }}

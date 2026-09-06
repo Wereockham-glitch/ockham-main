@@ -1,46 +1,34 @@
-    import { useRef, useState } from "react";
-    import { gql } from "@apollo/client";
-    import { getApolloClient } from "@/lib/apollo";
-    import { use100vh } from "react-div-100vh";
-    import dynamic from "next/dynamic";
-    import { NextSeo } from "next-seo";
-    import Head from "next/head";
-    import Fullscreen from "./components/Fullscreen";
-    import Thumb from "./components/Thumb";
-    const Cabecera = dynamic(() => import("./components/Cabecera"), {
-      ssr: true,
-    });
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { gql } from "@apollo/client";
+import { getApolloClient } from "@/lib/apollo";
+import { selectPortfolioProjects } from "@/lib/portfolio.mjs";
+import { usePortfolio } from "@/components/portfolio/PortfolioContext";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
+import Fullscreen from "./components/Fullscreen";
+import Thumb from "./components/Thumb";
+import InfinitePortfolio from "./components/InfinitePortfolio";
 
-    const InfinitePortfolio = dynamic(
-      () => import("./components/InfinitePortfolio"),
-      {
-        ssr: true,
-      }
-    );
-    export default function Home({ page = undefined, fullscreen, setFullscreen, fullscreenUrl, setFullscreenUrl }) {
-      const height = use100vh();
-      const cHeight = height ? height : "100vh";
-      const cHeightFooter = height + 15 ? height + 15 : "calc(100vh + 15px)";
-      const cHeightCabecera = height + 48 ? height + 48 : "calc(100vh + 48px)";
-      const [activeThumb, setActiveThumb] = useState();
-      const [thumbs, setThumbs] = useState([]);
-
-      const { listadoProyectos } = page?.page;
-      const { cabecera } = page?.page;
-      const { seo } = page?.page;
-      const { imagenCabecera } = cabecera;
-      const imagenCabeceraUrl = imagenCabecera?.sourceUrl;
-      const imagenCabeceraAlt = imagenCabecera?.altText;
-      const imagenCabeceraWidth = imagenCabecera?.mediaDetails?.width;
-      const imagenCabeceraHeight = imagenCabecera?.mediaDetails?.height;
-      const imagenCabeceraName = imagenCabecera?.mediaDetails?.sizes.name;
-      const { logo } = cabecera;
-      const logoUrl = logo?.sourceUrl;
-
-      const { videoCabecera } = cabecera;
-      const { videoCabeceraMp4 } = cabecera;
-
-      const videoCabeceraRef = useRef();
+export default function Home({ page, fullscreen, setFullscreen, setFullscreenUrl }) {
+  const { category } = usePortfolio();
+  const projects = useMemo(() => (page?.page?.listadoProyectos?.proyectos || []).filter(project => project.category === category), [page, category]);
+  const [activeId, setActiveId] = useState(projects[0]?.id || null);
+  const [playerProject, setPlayerProject] = useState(null);
+  const activeProject = projects.find(project => project.id === activeId) || projects[0] || null;
+  const openProject = useCallback(project => {
+    if (!project?.videoUrl) return;
+    setPlayerProject(project);
+    setFullscreenUrl(project.videoUrl);
+    setFullscreen(true);
+  }, [setFullscreen, setFullscreenUrl]);
+  const closePlayer = useCallback(() => setFullscreen(false), [setFullscreen]);
+  useEffect(() => {
+    setActiveId(projects[0]?.id || null);
+    setPlayerProject(null);
+    setFullscreen(false);
+    const viewport = document.querySelector(".home-scroll-viewport");
+    if (viewport) viewport.scrollTop = 0;
+  }, [projects, setFullscreen]);
 
       return (
         <>
@@ -103,50 +91,17 @@
       }}
     />
 
-          <div className="bg-white">
-            <Cabecera
-              fullscreen={fullscreen}
-              setFullscreen={setFullscreen}
-              height={cHeightCabecera}
-              imagenCabecera={imagenCabecera}
-              imagenCabeceraAlt={imagenCabeceraAlt}
-              imagenCabeceraUrl={imagenCabeceraUrl}
-              videoCabeceraMp4={videoCabeceraMp4}
-              videoCabecera={videoCabecera}
-              videoCabeceraRef={videoCabeceraRef}
-            />
-            <InfinitePortfolio
-  fullscreen={fullscreen}
-  setFullscreen={setFullscreen}
-  setFullscreenUrl={setFullscreenUrl}
-  setActiveThumb={setActiveThumb}
-  setThumbs={setThumbs}
-  listadoProyectos={listadoProyectos}
-/>
-            <Cabecera
-              height={cHeightFooter}
-              imagenCabecera={imagenCabecera}
-              imagenCabeceraAlt={imagenCabeceraAlt}
-              imagenCabeceraUrl={imagenCabeceraUrl}
-              videoCabeceraMp4={videoCabeceraMp4}
-              videoCabecera={videoCabecera}
-              videoCabeceraRef={videoCabeceraRef}
-              fullscreen={fullscreen}
-              setFullscreen={setFullscreen}
-            />
-            <Thumb
-              fullscreen={fullscreen}
-              setFullscreen={setFullscreen}
-              setFullscreenUrl={setFullscreenUrl}
-              activeThumb={activeThumb}
-              thumbs={thumbs}
-            />
-            <Fullscreen
-              fullscreen={fullscreen}
-              fullscreenUrl={fullscreenUrl}
-              setFullscreen={setFullscreen}
-            />
-          </div>
+          <main className="editorial-home">
+            <div inert={fullscreen ? "" : undefined} aria-hidden={fullscreen || undefined}>
+              {projects.length ? <InfinitePortfolio key={category} projects={projects} fullscreen={fullscreen}
+                onOpen={openProject} onActiveProject={setActiveId} /> :
+                <section className="editorial-empty" aria-live="polite">
+                  <p>New films, coming soon.</p>
+                </section>}
+            </div>
+            <Thumb project={activeProject} fullscreen={fullscreen} onOpen={openProject} />
+            <Fullscreen project={playerProject} fullscreen={fullscreen} onClose={closePlayer} />
+          </main>
         </>
       );
     }
@@ -158,63 +113,26 @@
         query: gql`
           query IndexContent {
             page(id: "home", idType: URI) {
-              cabecera {
-                imagenCabecera {
-                  sourceUrl
-                  altText
-                  mediaDetails {
-                    height
-                    width
-                    sizes {
-                      name
-                    }
-                  }
-                }
-                logo {
-                  sourceUrl
-                  altText
-                  mediaDetails {
-                    height
-                    width
-                    sizes {
-                      name
-                    }
-                  }
-                }
-                videoCabecera
-                videoCabeceraMp4 {
-                  sourceUrl
-                }
-              }
               listadoProyectos {
                 proyectos {
                   ... on Proyectos {
                     id
+                    status
+                    isPreview
+                    isRestricted
+                    slug
                     title
                     contenidoProyecto {
                       mosaico {
-                        video
                         image {
                           sourceUrl
-                          sizes
                           altText
-                          title
-                          base64 {
-                            base64field
-                          }
                           mediaDetails {
                             height
                             width
-                            sizes {
-                              name
-                            }
                           }
                         }
-                        size
                         index
-                        columnStart
-                        yPosition
-                        xPosition
                       }
                       collage {
                         credits
@@ -223,10 +141,6 @@
                           image {
                             altText
                             sourceUrl
-                            title
-                            base64 {
-                              base64field
-                            }
                             mediaDetails {
                               height
                               width
@@ -243,7 +157,6 @@
                         slider {
                           image {
                             altText
-                            title
                             sourceUrl
                             mediaDetails {
                               height
@@ -262,34 +175,15 @@
                   }
                 }
               }
-              seo {
-                fullHead
-
-                title
-                metaDesc
-
-                opengraphAuthor
-                opengraphDescription
-                opengraphTitle
-                opengraphDescription
-
-                opengraphImage {
-                  altText
-                  sourceUrl
-                  srcSet
-                }
-                twitterImage {
-                  altText
-                  sourceUrl
-                  srcSet
-                }
-              }
             }
           }
         `,
       });
       const page = {
-        ...data?.data,
+        page: {
+          ...data.data.page,
+          listadoProyectos: { proyectos: selectPortfolioProjects(data.data.page.listadoProyectos?.proyectos) },
+        },
       };
 
       return {

@@ -63,7 +63,7 @@ const DailyGrid = ({ images }) => {
           return (
             <div
               key={i}
-              className="relative self-start"
+              className="relative self-start w-[86%] justify-self-center"
               style={{
                 gridColumn: `${layout.start} / span ${layout.span}`,
                 gridRow: layout.row,
@@ -81,7 +81,7 @@ const DailyGrid = ({ images }) => {
         })}
       </div>
 
-      <div className="hidden md:grid grid-cols-12 px-4 gap-y-16 pt-8 pb-32">
+      <div className="hidden md:grid grid-cols-12 px-4 gap-y-20 pt-8 pb-40">
         {images?.map((img, i) => {
           const layout = layouts[i];
 
@@ -90,7 +90,7 @@ const DailyGrid = ({ images }) => {
           return (
             <div
               key={i}
-              className="relative"
+              className="relative w-[82%] justify-self-center"
               style={{
                 gridColumn: `${layout.start} / span ${layout.span}`,
                 transform: `translateY(${layout.y}px)`,

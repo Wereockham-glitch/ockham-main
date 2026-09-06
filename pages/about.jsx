@@ -34,10 +34,10 @@ export default function About({ page = undefined }) {
     siteName: "OCKHAM",
   }}
 />
-      <div className="bg-white min-h-screen px-6 md:px-8 pt-[21px] md:pt-4 pb-8 flex flex-col">
+      <div className="editorial-about bg-white min-h-screen px-[14px] md:px-6 pt-[21px] pb-8 flex flex-col">
         {/* Texto */}
        {/* Texto */}
-<div className="max-w-[205px] md:max-w-[640px] font-condensed text-[17px] leading-[1.35] md:text-[15px] md:leading-[1.25] tracking-[-0.035em]">
+<div className="editorial-about-copy font-condensed tracking-[-0.025em]">
   <Link
     href="/"
     onClick={(event) => handleLinkClick(event, "/")}
@@ -75,7 +75,7 @@ export default function About({ page = undefined }) {
 </div>
 
         {/* Imagen */}
-        <div className="mt-8 w-[205px] md:w-auto">
+        <div className="editorial-about-image mt-8 w-[205px] md:w-auto">
           <Image
             src={AboutImage}
             alt="Lucas and Cora"
@@ -85,12 +85,12 @@ export default function About({ page = undefined }) {
         </div>
 
         {/* Footer */}
-        <div className="mt-auto pt-16 flex justify-between items-end font-condensed">
-          <div className="text-[14px] tracking-[-0.02em]">
+        <div className="editorial-about-footer mt-auto pt-16 flex justify-between items-end font-condensed">
+          <div>
             <a href="mailto:weareockham@gmail.com">mail</a>
           </div>
 
-          <div className="flex flex-col items-end gap-0.5 text-[14px] tracking-[-0.02em]">
+          <div className="flex flex-col items-end gap-0.5">
             <a
               href="https://vimeo.com/ockhamduo"
               target="_blank"

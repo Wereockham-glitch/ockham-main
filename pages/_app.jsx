@@ -1,5 +1,7 @@
 import "@/styles/index.css";
 import "@/styles/index.scss";
+import "@/styles/editorial.css";
+import { PortfolioProvider } from "@/components/portfolio/PortfolioContext";
 import Head from "next/head";
 import Header from "./components/Header";
 import localFont from "@next/font/local";
@@ -28,7 +30,7 @@ export default function App({ Component, pageProps }) {
   const [fullscreen, setFullscreen] = useState();
   const [fullscreenUrl, setFullscreenUrl] = useState();
   return (
-    <PageTransition>
+    <PortfolioProvider><PageTransition>
       <Head>
         <link
           rel="icon"
@@ -50,6 +52,6 @@ export default function App({ Component, pageProps }) {
           />
         </Layout>
       </div>
-    </PageTransition>
+    </PageTransition></PortfolioProvider>
   );
 }
