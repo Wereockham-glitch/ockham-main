@@ -114,16 +114,13 @@
 @media (max-width: 767px) {
   .editorial-header { flex-wrap: nowrap; font-size: 13px; color: #111; mix-blend-mode: normal; }
   .editorial-nav { order: initial; font-size: 12px; gap: 16px; }
-  .editorial-header--info { padding-right: 26px; }
-  .editorial-header--daily { padding-top: 26px; font-size: clamp(10px, 3vw, 12px); }
-  .editorial-header--daily .editorial-brand { font-weight: 400; }
-  .editorial-header--daily .editorial-nav { gap: clamp(16px, 8vw, 32px); font-size: clamp(11px, 3.24vw, 13px); }
+  .editorial-header--info { padding-left: 26px; }
   .editorial-about {
     --info-inset: clamp(24px, 14.68vw, 90px);
     padding: 132px var(--info-inset) 24px;
   }
   .editorial-about-footer { display: contents; }
-  .editorial-about-copy { order: 1; font-size: clamp(14px, 4.23vw, 17px); line-height: 1.35; letter-spacing: -.04em; }
+  .editorial-about-copy { order: 1; font-size: clamp(13px, calc(4.23vw - 1px), 16px); line-height: 1.35; letter-spacing: -.04em; }
   .editorial-about-copy p + p { margin-top: 24px; }
   .editorial-about-stage { order: 2; flex: none; min-height: 0; margin-top: 66px; }
   .editorial-about-image { position: relative; top: auto; left: auto; width: 100%; max-width: none; }
