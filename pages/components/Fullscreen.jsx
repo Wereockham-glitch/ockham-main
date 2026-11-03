@@ -46,8 +46,8 @@ export default function Fullscreen({ project, fullscreen, onClose }) {
     <div className="editorial-player-header">
       <button type="button" onClick={onClose}>We’re <strong>{site.name}</strong>, a {site.descriptor}</button>
       <nav aria-label="Navegación del reproductor">
-        <Link href="/about" onClick={event => { onClose(); handleLinkClick(event, "/about"); }}>about</Link>
-        <Link href="/daily" onClick={event => { onClose(); handleLinkClick(event, "/daily"); }}>daily</Link>
+        <Link href="/about" onClick={event => { onClose(); handleLinkClick(event, "/about"); }}>INFO</Link>
+        <Link href="/daily" onClick={event => { onClose(); handleLinkClick(event, "/daily"); }}>DAILY</Link>
         <button type="button" ref={closeRef} onClick={onClose} aria-label="Cerrar reproductor">CLOSE ×</button>
       </nav>
     </div>

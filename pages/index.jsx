@@ -27,8 +27,6 @@ export default function Home({ page, fullscreen, setFullscreen, setFullscreenUrl
     setActiveId(projects[0]?.id || null);
     setPlayerProject(null);
     setFullscreen(false);
-    const viewport = document.querySelector(".home-scroll-viewport");
-    if (viewport) viewport.scrollTop = 0;
   }, [projects, setFullscreen]);
 
       return (

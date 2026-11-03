@@ -2,7 +2,7 @@
 // when the taxonomy is available. This module is only used at build time.
 export const portfolioConfig = [
   { id: "cG9zdDo0MjE=", key: "conde-duque", title: "Conde Duque", category: "campaigns", visible: true,
-    main: [7.5, 40, 28.5], stills: [[0, 46, 29, 14.5], [1, 69, 39, 10], [4, 59, 64, 14.5]], previewTop: 21,
+    main: [1.8, 40, 37.3], stills: [[0, 45.8, 34.7, 11.4, "06"], [1, 67.2, 43.7, 9.8, "02"], [4, 53.3, 67.4, 10.7, "05"]], previewTop: 27,
     description: "An audiovisual piece presenting the vibrant programme of Condeduque Contemporary Culture Centre: a dynamic meeting point for theatre, cinema, music, exhibitions and contemporary thought. Through an evocative and engaging visual language, the video will capture the centre’s multidisciplinary spirit, showcasing it as a space for artistic experimentation, critical reflection and dialogue—a place where creators, audiences and new ideas come together.",
     descriptionSource: "LUAR WEB - NEW.pdf, page 5",
     team: [
@@ -27,13 +27,13 @@ export const portfolioConfig = [
       { role: "Special thanks to", names: "Conde Duque, Carlo Rho, Raul Machado, Jose, Ire Gallarza, Oscar Rivas, Alex Umansky, Sara Palacios, Camper, Bershka, Ttarrago." },
     ] },
   { id: "cG9zdDozOQ==", key: "timberland", title: "Timberland", category: "campaigns", visible: true,
-    main: [7.5, 40, 29], stills: [[0, 47.5, 43, 11.5], [1, 66, 27, 9.5], [3, 62, 62, 12.5]], previewTop: 34,
+    main: [2, 36.8, 38.1], stills: [[0, 47.4, 47.2, 11.3, "06"], [1, 66.3, 31.8, 9.6, "05"], [3, 62, 66.8, 12.4, "07"]], previewTop: 34,
     description: null, team: null },
   { id: "cG9zdDo0NjQ=", key: "razer", title: "Razer x Retro Super Futurę", category: "campaigns", visible: true,
-    main: [11, 33, 22.5], stills: [[0, 46, 35, 10], [1, 67, 29, 6.5], [3, 64, 60, 8.5]], previewTop: 24,
+    main: [1.9, 29.3, 28.2], stills: [[0, 38.9, 41, 10, "06"], [1, 67.8, 35.2, 5.6, "02"], [3, 58.3, 65.5, 8.7, "07"]], previewTop: 24,
     description: null, team: null },
   { id: "cG9zdDo0NTI=", key: "melia", title: "Hotel Melia", category: "campaigns", visible: true,
-    main: [9.5, 40, 27.5], stills: [[5, 47, 35, 12], [0, 70, 43, 9.5], [4, 59, 65, 12]], previewTop: 22,
+    main: [1.9, 36.2, 35.2], stills: [[5, 43.7, 38.5, 12, "04"], [0, 71, 47.3, 9.9, "05"], [4, 56.3, 69, 11.4, "06"]], previewTop: 22,
     description: null, team: null },
 ];
 
