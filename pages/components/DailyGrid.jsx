@@ -13,9 +13,22 @@ const layout = [
   [26, 12.2, 181.5, 14.5], [27, 39.8, 189, 15], [25, 73.5, 186, 13.5],
 ];
 
+// Mobile positions and widths follow the supplied 402px-wide layout.
+const mobileLayout = {
+  1: [3.73, 29.60, 19.28], 2: [33.33, 51.00, 11.19], 3: [53.48, 23.88, 17.91],
+  4: [87.56, 42.54, 8.96], 5: [10.95, 62.19, 10.20], 6: [56.47, 60.45, 12.19],
+  7: [80.84, 85.82, 10.70], 8: [31.09, 90.79, 14.18], 9: [54.98, 103.48, 10.20],
+  10: [3.73, 99.50, 15.42], 11: [35.32, 127.61, 11.94], 12: [77.36, 131.09, 18.91],
+  13: [15.67, 148.26, 13.43], 14: [33.83, 182.59, 12.94], 15: [53.48, 146.52, 9.95],
+  16: [3.98, 194.03, 17.16], 17: [64.43, 186.82, 10.20], 19: [81.59, 161.19, 14.92],
+  20: [40.05, 224.38, 16.67], 21: [80.84, 211.19, 11.69], 22: [45.52, 272.14, 18.91],
+  23: [7.71, 251.74, 26.62], 24: [73.13, 241.54, 19.90], 25: [75.62, 280.85, 14.93],
+  26: [8.20, 293.03, 15.67], 27: [38.56, 310.45, 16.42],
+};
+
 export default function DailyGrid() {
   return <div className="daily-canvas" aria-label="Daily visual journal">
-    {layout.map(([number, x, y, w]) => <figure key={number} className="daily-photo" style={{ "--x": x, "--y": y, "--w": w }}>
+    {layout.map(([number, x, y, w]) => <figure key={number} className="daily-photo" style={{ "--x": x, "--y": y, "--w": w, "--mobile-x": mobileLayout[number][0], "--mobile-y": mobileLayout[number][1], "--mobile-w": mobileLayout[number][2] }}>
       <Image src={`/img/daily/${number}.jpg`} alt="" width={1000} height={1000}
         sizes="(max-width: 767px) 45vw, 24vw" />
     </figure>)}

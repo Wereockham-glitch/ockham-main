@@ -115,6 +115,9 @@
   .editorial-header { flex-wrap: nowrap; font-size: 13px; color: #111; mix-blend-mode: normal; }
   .editorial-nav { order: initial; font-size: 12px; gap: 16px; }
   .editorial-header--info { padding-right: 26px; }
+  .editorial-header--daily { padding-top: 26px; font-size: clamp(10px, 3vw, 12px); }
+  .editorial-header--daily .editorial-brand { font-weight: 400; }
+  .editorial-header--daily .editorial-nav { gap: clamp(16px, 8vw, 32px); font-size: clamp(11px, 3.24vw, 13px); }
   .editorial-about {
     --info-inset: clamp(24px, 14.68vw, 90px);
     padding: 132px var(--info-inset) 24px;
@@ -125,10 +128,6 @@
   .editorial-about-stage { order: 2; flex: none; min-height: 0; margin-top: 66px; }
   .editorial-about-image { position: relative; top: auto; left: auto; width: 100%; max-width: none; }
   .editorial-about-links { order: 3; align-items: flex-end; gap: 12px; font-size: 13px; margin: 68px calc(26px - var(--info-inset)) 0 0; }
-  .daily-canvas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 12px; row-gap: 38px; height: auto; padding: 120px 24px 80px; }
-  .daily-photo { position: relative; left: auto; top: auto; width: 100%; align-self: start; }
-  .daily-photo:nth-child(4n + 1) { grid-column: 1 / span 3; }
-  .daily-photo:nth-child(4n + 2) { grid-column: 5 / span 2; margin-top: 55px; }
-  .daily-photo:nth-child(4n + 3) { grid-column: 2 / span 2; }
-  .daily-photo:nth-child(4n + 4) { grid-column: 4 / span 3; margin-top: 45px; }
+  .daily-canvas { height: 342.29vw; }
+  .daily-photo { left: calc(var(--mobile-x) * 1%); top: calc(var(--mobile-y) * 1vw); width: calc(var(--mobile-w) * 1%); }
 }
