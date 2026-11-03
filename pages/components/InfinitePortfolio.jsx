@@ -52,8 +52,6 @@ export default function InfinitePortfolio({ projects = [], fullscreen, onOpen, o
         if (!scene) return;
         const rect = scene.getBoundingClientRect();
         const visible = Math.max(0, Math.min(rect.bottom, viewportRect.bottom) - Math.max(rect.top, viewportRect.top));
-        const distance = Math.min(Math.abs((rect.top + rect.height / 2) - (viewportRect.top + viewportRect.height / 2)) / viewportRect.height, 1);
-        scene.style.setProperty("--scene-veil", (distance * 0.42).toFixed(3));
         if (visible > bestArea) { bestKey = key; bestArea = visible; }
       });
       setActiveScene(bestKey);

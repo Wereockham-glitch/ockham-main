@@ -14,7 +14,7 @@ export default function Header({ fullscreen }) {
       {isAbout ? "X" : <>We’re <strong>{site.name}</strong>, a {site.descriptor}</>}
     </Link>
     <nav className="editorial-nav" aria-label="Navegación">
-      <Link href="/about" aria-current={isAbout ? "page" : undefined} onClick={event => handleLinkClick(event, "/about")}>INFO</Link>
+      <Link href="/about" aria-current={isAbout ? "page" : undefined} onClick={event => handleLinkClick(event, "/about")}>ABOUT</Link>
       <Link href="/daily" aria-current={router.pathname === "/daily" ? "page" : undefined} onClick={event => handleLinkClick(event, "/daily")}>DAILY</Link>
     </nav>
   </header>;
