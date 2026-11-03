@@ -112,7 +112,7 @@
 .daily-photo { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1vw); width: calc(var(--w) * 1%); }
 .daily-photo img { display: block; width: 100%; height: auto; }
 @media (max-width: 767px) {
-  .editorial-header { flex-wrap: nowrap; font-size: 13px; }
+  .editorial-header { flex-wrap: nowrap; font-size: 13px; color: #111; mix-blend-mode: normal; }
   .editorial-nav { order: initial; font-size: 12px; gap: 16px; }
   .editorial-header--info { padding-right: 26px; }
   .editorial-about {
