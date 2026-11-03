@@ -117,11 +117,18 @@
 @media (max-width: 767px) {
   .editorial-header { flex-wrap: nowrap; font-size: 13px; }
   .editorial-nav { order: initial; font-size: 12px; gap: 16px; }
-  .editorial-about { padding: 70px 14px 20px; }
-  .editorial-about-stage { min-height: 38svh; }
-  .editorial-about-image { top: 30%; left: 13%; width: 52%; max-width: 240px; }
-  .editorial-about-footer { display: flex; flex-direction: column; align-items: stretch; gap: 26px; font-size: 13px; }
-  .editorial-about-links { align-items: flex-end; gap: 7px; font-size: 12px; }
+  .editorial-header--info { padding-right: 26px; }
+  .editorial-header--info .editorial-close { display: none; }
+  .editorial-about {
+    --info-inset: clamp(24px, 14.68vw, 90px);
+    padding: 132px var(--info-inset) 24px;
+  }
+  .editorial-about-footer { display: contents; }
+  .editorial-about-copy { order: 1; font-size: clamp(14px, 4.23vw, 17px); line-height: 1.35; letter-spacing: -.04em; }
+  .editorial-about-copy p + p { margin-top: 24px; }
+  .editorial-about-stage { order: 2; flex: none; min-height: 0; margin-top: 66px; }
+  .editorial-about-image { position: relative; top: auto; left: auto; width: 100%; max-width: none; }
+  .editorial-about-links { order: 3; align-items: flex-end; gap: 12px; font-size: 13px; margin: 68px calc(26px - var(--info-inset)) 0 0; }
   .daily-canvas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 12px; row-gap: 38px; height: auto; padding: 120px 24px 80px; }
   .daily-photo { position: relative; left: auto; top: auto; width: 100%; align-self: start; }
   .daily-photo:nth-child(4n + 1) { grid-column: 1 / span 3; }

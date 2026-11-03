@@ -7,7 +7,7 @@ export default function Header({ fullscreen }) {
   const router = useRouter();
   const { handleLinkClick } = usePageTransition();
   const isAbout = router.pathname === "/about";
-  return <header className="editorial-header" aria-hidden={fullscreen || undefined} inert={fullscreen ? "" : undefined}>
+  return <header className={`editorial-header${isAbout ? " editorial-header--info" : ""}`} aria-hidden={fullscreen || undefined} inert={fullscreen ? "" : undefined}>
     <Link href="/" className={isAbout ? "editorial-close" : "editorial-brand"}
       aria-label={isAbout ? "Cerrar información y volver al inicio" : undefined}
       onClick={event => handleLinkClick(event, "/")}>
