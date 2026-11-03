@@ -1,0 +1,24 @@
+# Preserve existing links when moving OCKHAM to LUAR.
+[[redirects]]
+  from = "https://ockham.studio/*"
+  to = "https://luar.work/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://ockham.studio/*"
+  to = "https://luar.work/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.ockham.studio/*"
+  to = "https://luar.work/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.ockham.studio/*"
+  to = "https://luar.work/:splat"
+  status = 301
+  force = true

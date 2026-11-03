@@ -4,6 +4,7 @@ import { getApolloClient } from "@/lib/apollo";
 import { selectPortfolioProjects } from "@/lib/portfolio.mjs";
 import { usePortfolio } from "@/components/portfolio/PortfolioContext";
 import { NextSeo } from "next-seo";
+import { organizationSchema, pageSeo } from "@/lib/site.mjs";
 import Head from "next/head";
 import Fullscreen from "./components/Fullscreen";
 import Thumb from "./components/Thumb";
@@ -41,55 +42,11 @@ export default function Home({ page, fullscreen, setFullscreen, setFullscreenUrl
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "OCKHAM",
-            url: "https://ockham.studio",
-            logo: "https://ockham.studio/favicon.ico",
-            description:
-              "OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling.",
-            sameAs: [
-              "https://www.instagram.com/ockham.duo/",
-              "https://vimeo.com/ockhamduo"
-            ],
-            founder: [
-              {
-                "@type": "Person",
-                name: "Lucas Couto"
-              },
-              {
-                "@type": "Person",
-                name: "Cora Patiño"
-              }
-            ]
-          }),
+          __html: JSON.stringify(organizationSchema),
         }}
       />
     </Head>
-          <NextSeo
-      title="OCKHAM — Directing Duo | Lucas Couto & Cora Patiño"
-      description="OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling."
-      openGraph={{
-        url: "https://ockham.studio",
-        title: "OCKHAM — Directing Duo | Lucas Couto & Cora Patiño",
-        description:
-          "OCKHAM is a Madrid-based directing duo founded by Lucas Couto and Cora Patiño, creating work across film, commercials, and visual storytelling.",
-        images: [
-      {
-        url: "https://ockham.studio/img/about.jpg",
-        width: 1200,
-        height: 630,
-        alt: "OCKHAM — Directing Duo",
-        type: "image/jpeg",
-      },
-    ],
-        siteName: "OCKHAM",
-      }}
-      twitter={{
-        cardType: "summary_large_image",
-      }}
-    />
+          <NextSeo {...pageSeo()} />
 
           <main className="editorial-home">
             <div inert={fullscreen ? "" : undefined} aria-hidden={fullscreen || undefined}>

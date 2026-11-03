@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePageTransition } from "./PageTransition";
+import { site } from "@/lib/site.mjs";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
@@ -43,7 +44,7 @@ export default function Fullscreen({ project, fullscreen, onClose }) {
   const toggleInfo = () => { setShowInfo(value => !value); if (infoRef.current) infoRef.current.scrollTop = 0; };
   return <section ref={dialogRef} className="editorial-player" role="dialog" aria-modal="true" aria-label={`Reproductor: ${project.title}`}>
     <div className="editorial-player-header">
-      <button type="button" onClick={onClose}>We’re <strong>OCKHAM</strong>, a directing duo</button>
+      <button type="button" onClick={onClose}>We’re <strong>{site.name}</strong>, a {site.descriptor}</button>
       <nav aria-label="Navegación del reproductor">
         <Link href="/about" onClick={event => { onClose(); handleLinkClick(event, "/about"); }}>about</Link>
         <Link href="/daily" onClick={event => { onClose(); handleLinkClick(event, "/daily"); }}>daily</Link>

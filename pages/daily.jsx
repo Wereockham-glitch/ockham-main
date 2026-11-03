@@ -1,4 +1,5 @@
 import { NextSeo } from "next-seo";
+import { pageSeo, site } from "@/lib/site.mjs";
 import DailyGrid from "./components/DailyGrid";
 
 export default function Daily() {
@@ -27,25 +28,18 @@ export default function Daily() {
 
   return (
     <>
-      <NextSeo
-        title="Daily — OCKHAM"
-        description="Daily visual journal by OCKHAM — images, references, fragments and moments from our creative process."
-        openGraph={{
-          url: "https://ockham.studio/daily",
-          title: "Daily — OCKHAM",
-          description:
-            "Daily visual journal by OCKHAM — images, references, fragments and moments from our creative process.",
-          images: [
-            {
-              url: "https://ockham.studio/img/daily/1.jpg",
-              width: 1200,
-              height: 630,
-              alt: "OCKHAM Daily",
-            },
-          ],
-          siteName: "OCKHAM",
-        }}
-      />
+      <NextSeo {...pageSeo({
+        title: "Daily — LUAR",
+        description: "Daily visual journal by LUAR — images, references, fragments and moments from our creative process.",
+        path: "/daily",
+        image: {
+          url: `${site.origin}/img/daily/1.jpg`,
+          width: 720,
+          height: 510,
+          alt: "LUAR Daily",
+          type: "image/jpeg",
+        },
+      })} />
 
       <div className="bg-white min-h-screen">
         <DailyGrid images={mockImages} />

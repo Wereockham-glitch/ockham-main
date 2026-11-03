@@ -1,39 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { pageSeo, site } from "@/lib/site.mjs";
 import AboutImage from "../public/img/about.jpg";
-import { getApolloClient } from "@/lib/apollo";
-import { gql } from "@apollo/client";
 import { usePageTransition } from "./components/PageTransition";
 
-export default function About({ page = undefined }) {
+export default function About() {
   const { handleLinkClick } = usePageTransition();
 
   return (
     <>
-    <NextSeo
-  title={page?.page?.seo?.title || "About — OCKHAM"}
-  description={
-    page?.page?.seo?.metaDesc ||
-    "OCKHAM is a directing duo based in Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling."
-  }
-  openGraph={{
-    url: "https://ockham.studio/about",
-    title: page?.page?.seo?.title || "About — OCKHAM",
-    description:
-      page?.page?.seo?.metaDesc ||
-      "OCKHAM is a directing duo based in Madrid. Lucas Couto and Cora Patiño work across film, commercials and visual storytelling.",
-    images: [
-      {
-        url: "https://ockham.studio/img/about.jpg",
-        width: 1200,
-        height: 630,
-        alt: "OCKHAM About",
-      },
-    ],
-    siteName: "OCKHAM",
-  }}
-/>
+      <NextSeo {...pageSeo({ title: "About — LUAR | Lucas Couto & Cora Patiño", path: "/about" })} />
       <div className="editorial-about bg-white min-h-screen px-[14px] md:px-6 pt-[21px] pb-8 flex flex-col">
         {/* Texto */}
        {/* Texto */}
@@ -47,15 +24,15 @@ export default function About({ page = undefined }) {
       <p>
         <span className="md:hidden">
           <span className="block whitespace-nowrap">
-            We’re <strong>OCKHAM</strong>, a directing duo
+            We’re <strong>{site.name}</strong>, a {site.descriptor}
           </span>
-          <span className="block whitespace-nowrap">based between Madrid,</span>
+          <span className="block whitespace-nowrap">based in Madrid,</span>
           <span className="block whitespace-nowrap">
             by Lucas Couto and Cora Patiño.
           </span>
         </span>
         <span className="hidden md:inline">
-          We’re <strong>OCKHAM</strong>, a directing duo based in Madrid, by
+          We’re <strong>{site.name}</strong>, a {site.descriptor} based in Madrid, by
           Lucas Couto and Cora Patiño.
         </span>
       </p>
@@ -92,7 +69,7 @@ export default function About({ page = undefined }) {
 
           <div className="flex flex-col items-end gap-0.5">
             <a
-              href="https://vimeo.com/ockhamduo"
+              href="https://vimeo.com/luarluar"
               target="_blank"
               rel="noreferrer"
             >
@@ -100,42 +77,15 @@ export default function About({ page = undefined }) {
             </a>
 
             <a
-              href="https://www.instagram.com/ockham.duo/"
+              href="https://www.instagram.com/luar____luar/"
               target="_blank"
               rel="noreferrer"
             >
-              @ockham.duo
+              @luar____luar
             </a>
           </div>
         </div>
       </div>
     </>
   );
-}
-
-export async function getStaticProps() {
-  const apolloClient = getApolloClient();
-
-  const data = await apolloClient.query({
-    query: gql`
-      query AboutContent {
-        page(id: "about", idType: URI) {
-          seo {
-            title
-            metaDesc
-          }
-        }
-      }
-    `,
-  });
-
-  const page = {
-    ...data?.data,
-  };
-
-  return {
-    props: {
-      page,
-    },
-  };
 }

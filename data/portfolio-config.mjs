@@ -6,7 +6,7 @@ export const portfolioConfig = [
     description: "An audiovisual piece presenting the vibrant programme of Condeduque Contemporary Culture Centre: a dynamic meeting point for theatre, cinema, music, exhibitions and contemporary thought. Through an evocative and engaging visual language, the video will capture the centre’s multidisciplinary spirit, showcasing it as a space for artistic experimentation, critical reflection and dialogue—a place where creators, audiences and new ideas come together.",
     descriptionSource: "LUAR WEB - NEW.pdf, page 5",
     team: [
-      { role: "Directed by", names: "OCKHAM" },
+      { role: "Directed by", names: "LUAR" },
       { role: "Production", names: "Production Company: Garlic\nExecutive Producer: Álvaro Gorospe & Irene Nuñez\nProducer: Silvia Argüello" },
       { role: "", names: "Production Coordinator: Marianela Knaus\nProduction Assistant: Ángela Pérez-Sevilla" },
       { role: "", names: "Cinematography: David Lázaro\n1st AC: Antonio Albalate\nCamera Assistant: Pablo Tuche" },

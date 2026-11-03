@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePageTransition } from "./PageTransition";
 import { usePortfolio } from "../../components/portfolio/PortfolioContext";
+import { site } from "@/lib/site.mjs";
 
 const Header = ({ setFullscreen, fullscreen }) => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const Header = ({ setFullscreen, fullscreen }) => {
 
   if (router.pathname === "/") return <header className="editorial-header" aria-hidden={fullscreen || undefined} inert={fullscreen ? "" : undefined}>
     <Link href="/" className="editorial-brand" onClick={event => handleLinkClick(event, "/")}>
-      We’re <strong>OCKHAM</strong>, a directing duo
+      We’re <strong>{site.name}</strong>, a {site.descriptor}
     </Link>
     <nav className="editorial-filters" aria-label="Tipo de proyecto">
       <span aria-hidden="true">—</span>
@@ -51,7 +52,7 @@ const Header = ({ setFullscreen, fullscreen }) => {
       className="cursor-pointer"
       onClick={(event) => handleLinkClick(event, "/")}
     >
-      We’re <span className="font-bold">OCKHAM</span>, a directing duo
+      We’re <span className="font-bold">{site.name}</span>, a {site.descriptor}
     </Link>
   )}
 </div>
